@@ -1,28 +1,32 @@
-<div class="container">
-  <h2>User List</h2>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.phoneNumber }}</td>
-      <td>
-        <button (click)="deleteUser(user.id!)" class="btn btn-danger">Delete</button>
-        <a [routerLink]="['/user-details', user.id]" class="btn btn-primary">Details</a>
-        <a [routerLink]="['/user-form', user.id]" class="btn btn-warning">Edit</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <a [routerLink]="['/user-form']" class="btn btn-success">Add New User</a>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">User List</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <button (click)="deleteUser(user.id!)" class="btn btn-danger btn-sm">Delete</button>
+          <a [routerLink]="['/user-details', user.id]" class="btn btn-primary btn-sm">Details</a>
+          <a [routerLink]="['/user-form', user.id]" class="btn btn-warning btn-sm">Edit</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <a [routerLink]="['/user-form']" class="btn btn-success btn-sm mt-3">Add New User</a>
+  </div>
 </div>

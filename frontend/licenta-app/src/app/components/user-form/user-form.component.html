@@ -1,22 +1,28 @@
-<div class="container">
-  <h2>{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
+<div class="card card-primary">
+  <div class="card-header">
+    <h3 class="card-title">{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
+  </div>
   <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control" required>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" class="form-control">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="phoneNumber">Phone Number</label>
-      <input type="text" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update' : 'Create' }}</button>
   </form>
 </div>

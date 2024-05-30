@@ -1,10 +1,14 @@
-<div class="container" *ngIf="user">
-  <h2>User Details</h2>
-  <ul class="list-group">
-    <li class="list-group-item"><strong>ID:</strong> {{ user?.id }}</li>
-    <li class="list-group-item"><strong>Username:</strong> {{ user?.username }}</li>
-    <li class="list-group-item"><strong>Email:</strong> {{ user?.email }}</li>
-    <li class="list-group-item"><strong>Phone Number:</strong> {{ user?.phoneNumber }}</li>
-  </ul>
-  <a [routerLink]="['/users']" class="btn btn-primary mt-3">Back to Users List</a>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">User Details</h3>
+  </div>
+  <div class="card-body" *ngIf="user">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>ID:</strong> {{ user?.id }}</li>
+      <li class="list-group-item"><strong>Username:</strong> {{ user?.username }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ user?.email }}</li>
+      <li class="list-group-item"><strong>Phone Number:</strong> {{ user?.phoneNumber }}</li>
+    </ul>
+    <a [routerLink]="['/users']" class="btn btn-primary mt-3">Back to Users List</a>
+  </div>
 </div>
