@@ -1,9 +1,9 @@
-package com.example.demo.services;
+package com.example.demo.service;
 
 import com.example.demo.dto.UserDTO;
 import com.example.demo.exceptionsHandler.ResourceNotFoundException;
-import com.example.demo.models.Users;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.model.Users;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

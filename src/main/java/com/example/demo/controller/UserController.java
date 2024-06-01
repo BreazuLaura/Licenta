@@ -1,8 +1,8 @@
-package com.example.demo.controllers;
+package com.example.demo.controller;
 
 import com.example.demo.dto.UserDTO;
-import com.example.demo.models.Users;
-import com.example.demo.services.UserService;
+import com.example.demo.model.Users;
+import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

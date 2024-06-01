@@ -1,2 +1,33 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~admin-lte/dist/css/adminlte.min.css';
+
+/* Custom styles to ensure content alignment */
+
+.content-wrapper {
+  min-height: 100vh;
+  margin-left: 250px; /* Default margin when sidebar is open */
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin-left: 0; /* Remove margin on smaller screens */
+  }
+}
+
+.sidebar-mini.sidebar-collapse .content-wrapper {
+  margin-left: 80px; /* Adjust margin when sidebar is collapsed */
+}
+
+.wrapper .main-header {
+  margin-left: 250px; /* Default margin for header when sidebar is open */
+}
+
+@media (max-width: 768px) {
+  .wrapper .main-header {
+    margin-left: 0; /* Remove margin for header on smaller screens */
+  }
+}
+
+.sidebar-mini.sidebar-collapse .wrapper .main-header {
+  margin-left: 80px; /* Adjust margin for header when sidebar is collapsed */
+}

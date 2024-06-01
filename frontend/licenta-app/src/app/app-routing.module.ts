@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserFormComponent } from './components/user-form/user-form.component';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
-  { path: 'users', component: UserListComponent },
-  { path: 'user-form', component: UserFormComponent },
-  { path: 'user-form/:id', component: UserFormComponent },
-  { path: 'user-details/:id', component: UserDetailsComponent }
+  { path: '', component: HomeComponent },
+  { path: 'view-marketplace', component: ProductListComponent },
+  { path: 'user-form', component: ProductFormComponent },
+  { path: 'ecommerce/:id', component: ProductDetailComponent },
 ];
 
 @NgModule({
