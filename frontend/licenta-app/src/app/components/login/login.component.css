@@ -1,0 +1,18 @@
+/* Custom styles for the login page */
+.hold-transition.login-page {
+  background: #f4f6f9;
+}
+
+.login-box {
+  width: 360px;
+  margin: 7% auto;
+}
+
+.login-logo a {
+  color: #333;
+}
+
+.card {
+  border-radius: 0.25rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}

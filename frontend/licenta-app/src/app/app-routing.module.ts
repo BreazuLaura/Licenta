@@ -8,10 +8,12 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'view-marketplace', component: ProductListComponent },
   { path: 'product-form', component: ProductFormComponent },
   { path: 'user-form', component: UserFormComponent },

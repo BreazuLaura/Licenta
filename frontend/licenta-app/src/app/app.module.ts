@@ -14,6 +14,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     UserFormComponent,
     UserListComponent,
     UserDetailsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

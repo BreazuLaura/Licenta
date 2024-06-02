@@ -33,10 +33,6 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/username/{username}")
-    public ResponseEntity<Users> getUserByUsername(@PathVariable String username) {
-        return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
-    }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<Users> getUserByEmail(@PathVariable String email) {
@@ -52,6 +48,11 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {
         return new ResponseEntity<>(userService.updateUser(id, userDetails), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public Users loginUser(@RequestBody UserDTO userDTO) {
+        return userService.loginUser(userDTO);
     }
 }
 

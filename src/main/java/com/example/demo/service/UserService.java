@@ -16,7 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public Users saveUser(UserDTO userDTO) {
-        Users user = new Users(userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber());
+        Users user = new Users(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber());
         return userRepository.save(user);
     }
 
@@ -28,9 +28,6 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
-    public Users getUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-    }
 
     public Users getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -44,12 +41,21 @@ public class UserService {
     public Users updateUser(Long id, Users userDetails) {
         Users user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        user.setUsername(userDetails.getUsername());
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());
         user.setPhoneNumber(userDetails.getPhoneNumber());
 
         return userRepository.save(user);
+    }
+
+    public Users loginUser(UserDTO userDTO) {
+        Users user = userRepository.findByEmail(userDTO.getEmail()).orElse(null);
+        if (user != null && userDTO.getPassword().equals(user.getPassword())) {
+            return user;
+        }
+        throw new RuntimeException("Invalid credentials");
     }
 }
 
