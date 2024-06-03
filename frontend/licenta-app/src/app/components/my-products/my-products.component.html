@@ -1,0 +1,30 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>My Products</h1>
+      </div>
+      <div class="col-sm-6">
+        <button (click)="addNewProduct()" class="btn btn-primary float-right">Add New Product</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div *ngFor="let product of products" class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text"><strong>Price: </strong>{{ product.price }}</p>
+            <p class="card-text"><strong>Contact: </strong>{{ product.contactInfo }}</p>
+            <a [routerLink]="['/product-details', product.id]" class="btn btn-primary">More Info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
