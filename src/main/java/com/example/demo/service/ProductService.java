@@ -1,12 +1,16 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.model.AmazonClient;
+import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
 import com.example.demo.model.Users;
+import com.example.demo.repository.PhotoRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,6 +21,10 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AmazonClient amazonClient;
+    @Autowired
+    private PhotoRepository photoRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -26,12 +34,21 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    public Product createProduct(ProductDTO productDTO, Long userId) {
-        Users users = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        System.out.println(users);
-        Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), users);
-        System.out.println(product);
-        return productRepository.save(product);
+    public Product createProduct(ProductDTO productDTO, Long userId, MultipartFile file) {
+        // Create and save the product
+        Users user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), user);
+
+        Product savedProduct = productRepository.save(product);
+
+        // Upload the photo to S3 and save the photo entity
+        String fileName = amazonClient.uploadFile(file);
+        Photo photo = new Photo();
+        photo.setFileName(fileName);
+        photo.setProduct(savedProduct);
+        photoRepository.save(photo);
+
+        return savedProduct;
     }
 
     public Product updateProduct(Long id, Product product) {

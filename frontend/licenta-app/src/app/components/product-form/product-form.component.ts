@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -10,29 +11,32 @@ import { Router } from '@angular/router';
 export class ProductFormComponent {
   product = {
     name: '',
-    price: 0,
+    price: null,
     description: '',
     contactInfo: ''
   };
+  selectedFile: File | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  onSubmit() {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      console.log('Submitting product:', this.product);
-      this.http.post(`http://localhost:8080/products/${userId}`, this.product)
-        .subscribe(
-          response => {
-            console.log('Product created successfully', response);
-            this.router.navigate(['/view-marketplace']);
-          },
-          error => {
-            console.error('Error creating product', error);
-          }
-        );
-    } else {
-      console.error('User ID not found in local storage');
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onSubmit(form: NgForm) {
+    const formData = new FormData();
+    formData.append('product', new Blob([JSON.stringify(this.product)], { type: 'application/json' }));
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile, this.selectedFile.name);
     }
+
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+    this.http.post(`http://localhost:8080/products/${userId}`, formData)
+      .subscribe(response => {
+        console.log('Product created successfully', response);
+        this.router.navigate(['/my-products']);
+      }, error => {
+        console.error('Error creating product', error);
+      });
   }
 }
