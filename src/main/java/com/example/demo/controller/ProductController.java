@@ -25,9 +25,12 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @PostMapping
-    public Product createProduct(@RequestBody ProductDTO productDTO) {
-        return productService.createProduct(productDTO);
+    @PostMapping("/{userId}")
+    public Product createProduct(@RequestBody ProductDTO productDTO, @PathVariable Long userId) {
+        System.out.println("test");
+        System.out.println(productDTO);
+        System.out.println(userId);
+        return productService.createProduct(productDTO, userId);
     }
 
     @PutMapping("/{id}")
@@ -39,4 +42,10 @@ public class ProductController {
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<Product> getProductsByUserId(@PathVariable Long userId) {
+        return productService.getProductsByUserId(userId);
+    }
+
 }

@@ -1,8 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 public class Product {
@@ -15,18 +14,20 @@ public class Product {
     private String description;
     private String contactInfo;
 
-//    @ElementCollection
-//    private List<String> photos;
+    @ManyToOne
+    @JoinColumn(name = "owner")
+    @JsonIgnore
+    private Users owner;
 
     // Constructors
     public Product() {}
 
-    public Product(String name, double price, String description, String contactInfo) {
+    public Product(String name, double price, String description, String contactInfo, Users owner) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.contactInfo = contactInfo;
-        //this.photos = photos;
+        this.owner = owner;
     }
 
     // Getters and setters
@@ -70,11 +71,11 @@ public class Product {
         this.contactInfo = contactInfo;
     }
 
-//    public List<String> getPhotos() {
-//        return photos;
-//    }
+    public Users getOwner() {
+        return owner;
+    }
 
-//    public void setPhotos(List<String> photos) {
-//        this.photos = photos;
-//    }
+    public void setOwner(Users owner) {
+        this.owner = owner;
+    }
 }

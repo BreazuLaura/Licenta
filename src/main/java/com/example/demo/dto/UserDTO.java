@@ -1,5 +1,9 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Product;
+
+import java.util.List;
+
 public class UserDTO {
 
     private String firstName;
@@ -8,7 +12,8 @@ public class UserDTO {
     private String password;
     private String phoneNumber;
 
-    // getters and setters
+
+// getters and setters
 
 
     public String getFirstName() {
@@ -51,8 +56,12 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
+
+
     public UserDTO() {
     }
+
+
 
     public UserDTO(String firstName, String lastName, String email, String password, String phoneNumber) {
         this.firstName = firstName;

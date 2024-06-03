@@ -46,8 +46,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {
-        return new ResponseEntity<>(userService.updateUser(id, userDetails), HttpStatus.OK);
+    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users usersDetails) {
+        return new ResponseEntity<>(userService.updateUser(id, usersDetails), HttpStatus.OK);
     }
 
     @PostMapping("/login")

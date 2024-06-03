@@ -9,6 +9,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import {RegisterComponent} from "./components/register/register.component";
+import {MyProductsComponent} from "./components/my-products/my-products.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'user-form/:id', component: UserFormComponent },
   { path: 'user-details/:id', component: UserDetailsComponent },
   { path: 'users', component: UserListComponent },
-  { path: 'ecommerce/:id', component: ProductDetailComponent },
+  { path: 'product-details/:id', component: ProductDetailComponent },
+  { path: 'my-products', component: MyProductsComponent }
+
 ];
 
 @NgModule({

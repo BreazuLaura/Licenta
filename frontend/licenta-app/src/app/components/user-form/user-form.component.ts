@@ -9,7 +9,7 @@ import { User } from '../../models/user';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  user: User = { username: '', email: '', password: '', phoneNumber: '' };
+  user: User = { firstName: '', lastName: '', email: '', password: '', phoneNumber: '' };
   isEditMode: boolean = false;
 
   constructor(

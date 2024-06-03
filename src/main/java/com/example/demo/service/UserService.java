@@ -16,8 +16,8 @@ public class UserService {
     private UserRepository userRepository;
 
     public Users saveUser(UserDTO userDTO) {
-        Users user = new Users(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber());
-        return userRepository.save(user);
+        Users users = new Users(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber());
+        return userRepository.save(users);
     }
 
     public List<Users> getAllUsers() {
@@ -34,26 +34,26 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        Users user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        userRepository.delete(user);
+        Users users = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        userRepository.delete(users);
     }
 
-    public Users updateUser(Long id, Users userDetails) {
-        Users user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public Users updateUser(Long id, Users usersDetails) {
+        Users users = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
-        user.setEmail(userDetails.getEmail());
-        user.setPassword(userDetails.getPassword());
-        user.setPhoneNumber(userDetails.getPhoneNumber());
+        users.setFirstName(usersDetails.getFirstName());
+        users.setLastName(usersDetails.getLastName());
+        users.setEmail(usersDetails.getEmail());
+        users.setPassword(usersDetails.getPassword());
+        users.setPhoneNumber(usersDetails.getPhoneNumber());
 
-        return userRepository.save(user);
+        return userRepository.save(users);
     }
 
     public Users loginUser(UserDTO userDTO) {
-        Users user = userRepository.findByEmail(userDTO.getEmail()).orElse(null);
-        if (user != null && userDTO.getPassword().equals(user.getPassword())) {
-            return user;
+        Users users = userRepository.findByEmail(userDTO.getEmail()).orElse(null);
+        if (users != null && userDTO.getPassword().equals(users.getPassword())) {
+            return users;
         }
         throw new RuntimeException("Invalid credentials");
     }

@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Users;
+
 public class ProductDTO {
 
     private String name;
@@ -35,11 +37,12 @@ public class ProductDTO {
         return contactInfo;
     }
 
+
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
 
-    public ProductDTO(String name, double price, String description, String contactInfo) {
+    public ProductDTO(String name, double price, String description, String contactInfo, Users owner) {
         this.name = name;
         this.price = price;
         this.description = description;

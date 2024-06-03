@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Users {
@@ -13,6 +16,10 @@ public class Users {
     private String email;
     private String password;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnore
+    private List<Product> products;
 
     // getters and setters
 
@@ -65,9 +72,24 @@ public class Users {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public Users() {
+    }
+
+    public Users(String firstName, String lastName, String email, String password, String phoneNumber, List<Product> products) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.products = products;
     }
 
     public Users(String firstName, String lastName, String email, String password, String phoneNumber) {
