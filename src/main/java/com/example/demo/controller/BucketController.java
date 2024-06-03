@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.ValidationException;
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/storage/")
 public class BucketController {
@@ -21,4 +24,10 @@ public class BucketController {
     public String deleteFile(@RequestPart(value = "url") String fileUrl) {
         return this.amazonClient.deleteFileFromS3Bucket(fileUrl);
     }
+
+    @GetMapping("/downloadFile")
+    public Object downloadFile(@RequestBody String filename) throws ValidationException, IOException {
+        return this.amazonClient.downloadFile(filename);
+    }
+
 }
