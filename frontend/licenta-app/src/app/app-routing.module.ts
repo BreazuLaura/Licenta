@@ -10,6 +10,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import {RegisterComponent} from "./components/register/register.component";
 import {MyProductsComponent} from "./components/my-products/my-products.component";
+import {MyProfileComponent} from "./components/my-profile/my-profile.component";
+import {PhotoViewerComponent} from "./components/photo-viewer/photo-viewer.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'user-details/:id', component: UserDetailsComponent },
   { path: 'users', component: UserListComponent },
   { path: 'product-details/:id', component: ProductDetailComponent },
-  { path: 'my-products', component: MyProductsComponent }
+  { path: 'my-products', component: MyProductsComponent },
+  { path: 'my-profile', component: MyProfileComponent},
+  { path: 'viewer', component: PhotoViewerComponent}
 
 ];
 

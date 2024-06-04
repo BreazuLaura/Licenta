@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-product-detail',
@@ -10,16 +11,29 @@ import { Product } from '../../models/product';
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
+  productPhoto: string | undefined;
+  photoUrl: SafeUrl | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
-  ) {}
+  constructor(private route: ActivatedRoute, private productService: ProductService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.productService.getProductById(id).subscribe(product => {
+    const productId = Number(this.route.snapshot.paramMap.get('id'));
+    this.productService.getProductById(productId).subscribe(product => {
       this.product = product;
+      this.loadPhoto(productId);
     });
+  }
+
+  loadPhoto(productId: number): void {
+    this.productService.getProductPhoto(productId).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      this.photoUrl = this.sanitizer.bypassSecurityTrustUrl(url);
+    }, error => {
+      console.error('Failed to load photo:', error);
+    });
+  }
+
+  getProductPhotoUrl(productId: number): string {
+    return this.productPhoto!;
   }
 }

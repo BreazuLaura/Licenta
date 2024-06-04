@@ -30,4 +30,8 @@ export class ProductService {
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getProductPhoto(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/photo/${id}`, { responseType: 'blob' });
+  }
 }

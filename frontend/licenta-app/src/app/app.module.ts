@@ -16,6 +16,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { MyProductsComponent } from './components/my-products/my-products.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { PhotoViewerComponent } from './components/photo-viewer/photo-viewer.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,15 @@ import { MyProductsComponent } from './components/my-products/my-products.compon
     UserDetailsComponent,
     RegisterComponent,
     MyProductsComponent,
+    MyProfileComponent,
+    PhotoViewerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

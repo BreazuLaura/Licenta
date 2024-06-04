@@ -17,8 +17,11 @@ import javax.xml.bind.ValidationException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 
@@ -80,22 +83,16 @@ public class AmazonClient {
             throw new ValidationException("Requested bucket does not exist or is empty");
         }
         S3Object object = s3client.getObject(bucketName, fileName);
-        try (S3ObjectInputStream s3is = object.getObjectContent()) {
-            try (FileOutputStream fileOutputStream = new FileOutputStream(fileName)) {
-                byte[] read_buf = new byte[1024];
-                int read_len = 0;
-                while ((read_len = s3is.read(read_buf)) > 0) {
-                    fileOutputStream.write(read_buf, 0, read_len);
-                }
-            }
-            Path pathObject = Paths.get(fileName);
-            Resource resource = new UrlResource(pathObject.toUri());
+        Path path = Paths.get(fileName);
 
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new ValidationException("Could not find the file!");
-            }
+        try (InputStream inputStream = object.getObjectContent()) {
+            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+        }
+        Resource resource = new UrlResource(path.toUri());
+        if (resource.exists() || resource.isReadable()) {
+            return resource;
+        } else {
+            throw new ValidationException("Could not find the file!");
         }
     }
 
