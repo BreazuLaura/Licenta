@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-my-products',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class MyProductsComponent implements OnInit {
   products: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private productService: ProductService) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -23,6 +24,12 @@ export class MyProductsComponent implements OnInit {
         .subscribe(
           data => {
             this.products = data;
+            this.products.forEach(product => {
+              this.productService.downloadFile(product.id).subscribe((blob: Blob) => {
+                let objectURL = URL.createObjectURL(blob);
+                product.imageSrc = objectURL;
+              });
+            });
           },
           error => {
             console.error('Error fetching user products', error);
