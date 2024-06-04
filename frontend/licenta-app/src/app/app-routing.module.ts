@@ -12,6 +12,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {MyProductsComponent} from "./components/my-products/my-products.component";
 import {MyProfileComponent} from "./components/my-profile/my-profile.component";
 import {PhotoViewerComponent} from "./components/photo-viewer/photo-viewer.component";
+import {ChatComponent} from "./components/chat/chat.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'product-details/:id', component: ProductDetailComponent },
   { path: 'my-products', component: MyProductsComponent },
   { path: 'my-profile', component: MyProfileComponent},
-  { path: 'viewer', component: PhotoViewerComponent}
+  { path: 'viewer', component: PhotoViewerComponent},
+  { path: 'chat', component: ChatComponent}
 
 ];
 

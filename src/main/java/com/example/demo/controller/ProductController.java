@@ -5,6 +5,7 @@ import com.example.demo.dto.ProductDTO;
 import com.example.demo.model.AmazonClient;
 import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
+import com.example.demo.model.Users;
 import com.example.demo.repository.PhotoRepository;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,46 +72,6 @@ public class ProductController {
         return productService.getProductsByUserId(userId);
     }
 
-//    @GetMapping("/photo/{id}")
-//    public ResponseEntity<Object> getProductPhoto(@PathVariable Long id) {
-//        try {
-//            Product product = productService.getProductById(id);
-//            List<Photo> photos = photoRepository.findByProductId(id);
-//
-//            if (photos.isEmpty()) {
-//                return ResponseEntity.notFound().build();
-//            }
-//
-//            Photo photo = photos.get(0);
-//            Resource resource = (Resource) amazonClient.downloadFile(photo.getFileName());
-//
-//            return ResponseEntity.ok()
-//                    .contentType(MediaType.parseMediaType("image/jpeg")) // Adjust according to your file type
-//                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
-//                    .body(resource);
-//        } catch (IOException e) {
-//            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Resource cannot be accessed.");
-//        } catch (ValidationException e) {
-//            return ResponseEntity.badRequest().body("Invalid request data.");
-//        }
-//    }
-
-//    @GetMapping(path ="/photo")
-//    public ResponseEntity<ByteArrayResource> downloadFile(@RequestBody String fileName) throws ValidationException, IOException {
-//        byte[] data = this.getClass().getClassLoader()
-//                .getResourceAsStream((amazonClient.downloadFile(fileName))).readAllBytes();
-//        //byte[] data = (byte[]) amazonClient.downloadFile(fileName);
-//        ByteArrayResource resource = new ByteArrayResource(data);
-//        IOUtils.toByteArray(amazonClient.downloadFile(fileName));
-//        return ResponseEntity
-//                .ok()
-//                .contentLength(data.length)
-//                .header("Content-type", "image/jpeg")
-//                .header("Content-disposition", "attachment; filename=\"" + fileName + "\"")
-//                .body(resource);
-//    }
-
-
     @GetMapping("/photo/{id}")
     public ResponseEntity<Object> getProductPhoto(@PathVariable Long id) {
         System.out.println("------------------");
@@ -135,6 +96,8 @@ public class ProductController {
         }
     }
 
-
-
+    @GetMapping("/get-seller/{productId}")
+    public Users getSellerOfProduct(@PathVariable Long productId) throws ValidationException {
+        return productService.getSellerOfProduct(productId);
+    }
 }

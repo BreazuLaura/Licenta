@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -69,4 +71,12 @@ public class ProductService {
         return productRepository.findByOwnerId(userId);
     }
 
+    public Users getSellerOfProduct(Long productId) throws ValidationException {
+        Optional<Product> product = productRepository.findById(productId);
+        if(product.isEmpty()) {
+            throw new ValidationException("No product found!");
+        }
+
+        return product.get().getOwner();
+    }
 }

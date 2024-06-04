@@ -4,6 +4,10 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FileService} from "../../services/file.service";
+import { SellerService } from '../../services/seller.service'; // Import the SellerService
+import { MatDialog } from '@angular/material/dialog';
+import {ContactSellerComponent} from "../contact-seller/contact-seller.component";
+
 
 @Component({
   selector: 'app-product-detail',
@@ -17,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
   imageSrc?: SafeUrl; // Now optional to handle initialization
 
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private sanitizer: DomSanitizer, private fileService: FileService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private sanitizer: DomSanitizer, private fileService: FileService, public dialog: MatDialog, private sellerService: SellerService) { }
 
   ngOnInit(): void {
      const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -33,6 +37,14 @@ export class ProductDetailComponent implements OnInit {
       this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     }, error => {
       console.error('Error downloading the file', error);
+    });
+  }
+
+  openContactSellerPopup(): void {
+    // Open the contact seller popup
+    const dialogRef = this.dialog.open(ContactSellerComponent, {
+      width: '400px', // Adjust width as needed
+      data: { productId: this.product?.id } // Pass the productId to the dialog
     });
   }
 

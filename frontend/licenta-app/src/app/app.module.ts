@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,6 +19,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { MyProductsComponent } from './components/my-products/my-products.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PhotoViewerComponent } from './components/photo-viewer/photo-viewer.component';
+import { ContactSellerComponent } from './components/contact-seller/contact-seller.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +38,17 @@ import { PhotoViewerComponent } from './components/photo-viewer/photo-viewer.com
     MyProductsComponent,
     MyProfileComponent,
     PhotoViewerComponent,
+    ContactSellerComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
