@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import {UserService} from "./services/user.service";
+import {User} from "./models/user";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +11,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   showMenu: boolean = true;
+  private userSubscription: Subscription | undefined;
+  userName: string | undefined;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -17,5 +22,25 @@ export class AppComponent implements OnInit {
         this.showMenu = !['/', '/register', '/login'].includes(event.urlAfterRedirects);
       }
     });
+
+    const userId: string | null = localStorage.getItem('userId'); // Get userId from local storage
+    if (userId) {
+      this.userSubscription = this.userService.getUser(Number(userId))
+        .subscribe(
+          user => {
+            this.userName = user.firstName + " " + user.lastName; // Assuming 'name' is the property that stores the user's name
+          },
+          error => {
+            console.error('Error fetching user name:', error);
+          }
+        );
+    }
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the user subscription to prevent memory leaks
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

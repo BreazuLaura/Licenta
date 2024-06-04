@@ -132,8 +132,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Dorm MarketPlace</span>
     </a>
 
     <!-- Sidebar -->
@@ -144,7 +144,7 @@
           <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/my-profile" class="d-block">Alexander Pierce</a>
+          <a href="/my-profile" class="d-block">{{userName}}</a>
         </div>
       </div>
 
@@ -169,30 +169,86 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dorm Marketplace
+                View MarketPlace
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a routerLink="/view-marketplace" class="nav-link">
+                <a routerLink="/products-marketplace" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>View marketplace</p>
+                  <p>Products marketplace</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a routerLink="/services-marketplace" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Services marketplace</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/auctionplace" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                AuctionPlace
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                My MarketPlace
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a routerLink="/my-products" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>My products</p>
+                  <p>My Products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a routerLink="/ecommerce/1" class="nav-link">
+                <a routerLink="/my-services" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>E-commerce</p>
+                  <p>My Services</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a routerLink="/my-auctions" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>My Auctions</p>
+                </a>
+              </li>
+
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/my-calendar" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                My Calendar
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/doorm-map" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Doorm Map
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
           </li>
         </ul>
       </nav>

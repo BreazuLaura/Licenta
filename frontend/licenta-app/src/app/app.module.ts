@@ -22,6 +22,7 @@ import { PhotoViewerComponent } from './components/photo-viewer/photo-viewer.com
 import { ContactSellerComponent } from './components/contact-seller/contact-seller.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './components/chat/chat.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ChatComponent } from './components/chat/chat.component';
     PhotoViewerComponent,
     ContactSellerComponent,
     ChatComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

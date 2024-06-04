@@ -22,7 +22,7 @@
             <p class="card-text">{{ product.description }}</p>
             <p class="card-text"><strong>Price: </strong>{{ product.price }}</p>
             <p class="card-text"><strong>Contact: </strong>{{ product.contactInfo }}</p>
-            <a [routerLink]="['/product-details', product.id]" class="btn btn-primary">More Info</a>
+            <a [routerLink]="['/edit-product', product.id]" class="btn btn-primary">Edit Product</a>
           </div>
         </div>
       </div>

@@ -13,12 +13,13 @@ import {MyProductsComponent} from "./components/my-products/my-products.componen
 import {MyProfileComponent} from "./components/my-profile/my-profile.component";
 import {PhotoViewerComponent} from "./components/photo-viewer/photo-viewer.component";
 import {ChatComponent} from "./components/chat/chat.component";
+import {EditProductComponent} from "./components/edit-product/edit-product.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'view-marketplace', component: ProductListComponent },
+  { path: 'products-marketplace', component: ProductListComponent },
   { path: 'product-form', component: ProductFormComponent },
   { path: 'user-form', component: UserFormComponent },
   { path: 'user-form/:id', component: UserFormComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'my-products', component: MyProductsComponent },
   { path: 'my-profile', component: MyProfileComponent},
   { path: 'viewer', component: PhotoViewerComponent},
-  { path: 'chat', component: ChatComponent}
+  { path: 'chat', component: ChatComponent},
+  { path: 'edit-product/:id', component: EditProductComponent}
 
 ];
 
