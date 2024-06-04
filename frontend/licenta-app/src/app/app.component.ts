@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   showMenu: boolean = true;
   private userSubscription: Subscription | undefined;
   userName: string | undefined;
+  userId: string | null | undefined
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -23,9 +24,9 @@ export class AppComponent implements OnInit {
       }
     });
 
-    const userId: string | null = localStorage.getItem('userId'); // Get userId from local storage
-    if (userId) {
-      this.userSubscription = this.userService.getUser(Number(userId))
+    this.userId = localStorage.getItem('userId'); // Get userId from local storage
+    if (this.userId) {
+      this.userSubscription = this.userService.getUser(Number(this.userId))
         .subscribe(
           user => {
             this.userName = user.firstName + " " + user.lastName; // Assuming 'name' is the property that stores the user's name

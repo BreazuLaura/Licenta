@@ -144,7 +144,7 @@
           <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/my-profile" class="d-block">{{userName}}</a>
+          <a href="/my-profile/{{userId}}" class="d-block">{{userName}}</a>
         </div>
       </div>
 
@@ -225,6 +225,12 @@
                 <a routerLink="/my-auctions" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>My Auctions</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/statistics" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Statistics</p>
                 </a>
               </li>
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-form',
@@ -17,7 +18,9 @@ export class ProductFormComponent {
   };
   selectedFile: File | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar // Inject MatSnackBar
+  ) {}
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
@@ -34,6 +37,9 @@ export class ProductFormComponent {
     this.http.post(`http://localhost:8080/products/${userId}`, formData)
       .subscribe(response => {
         console.log('Product created successfully', response);
+        this.snackBar.open('Product updated successfully', 'Close', {
+          duration: 3000, // Notification will close after 3 seconds
+        });
         this.router.navigate(['/my-products']);
       }, error => {
         console.error('Error creating product', error);

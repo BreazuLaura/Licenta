@@ -8,9 +8,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductFormComponent } from './components/product-form/product-form.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductListComponent } from './components/product-marketplace/product-list.component';
+import { ProductFormComponent } from './components/add-product/product-form.component';
+import { ProductDetailComponent } from './components/product-details/product-detail.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
@@ -23,6 +23,8 @@ import { ContactSellerComponent } from './components/contact-seller/contact-sell
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './components/chat/chat.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     AppRoutingModule,
     RouterModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
