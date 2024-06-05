@@ -14,10 +14,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import jakarta.persistence.criteria.Predicate;
 import javax.xml.bind.ValidationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -88,4 +90,21 @@ public class ProductService {
 
         return product.get().getOwner();
     }
+
+    public List<Product> getFilteredProducts(String searchQuery, String filterCategory, String filterDorm, String filterStatus, String sortOrder, String orderBy) {
+        return productRepository.findAll().stream()
+                .filter(product -> (searchQuery == null || searchQuery.isEmpty() || product.getName().toLowerCase().contains(searchQuery.toLowerCase())))
+                .filter(product -> (filterCategory == null || filterCategory.isEmpty() || (product.getCategory() != null && product.getCategory().name().equalsIgnoreCase(filterCategory))))
+                .filter(product -> (filterDorm == null || filterDorm.isEmpty() || (product.getDorm() != null && product.getDorm().name().equalsIgnoreCase(filterDorm))))
+                .filter(product -> (filterStatus == null || filterStatus.isEmpty() || (product.getStatus() != null && product.getStatus().name().equalsIgnoreCase(filterStatus))))
+                .sorted((p1, p2) -> {
+                    if ("price".equalsIgnoreCase(orderBy)) {
+                        return "asc".equalsIgnoreCase(sortOrder) ? Double.compare(p1.getPrice(), p2.getPrice()) : Double.compare(p2.getPrice(), p1.getPrice());
+                    } else {
+                        return "asc".equalsIgnoreCase(sortOrder) ? p1.getName().compareToIgnoreCase(p2.getName()) : p2.getName().compareToIgnoreCase(p1.getName());
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
 }

@@ -6,6 +6,9 @@ import com.example.demo.model.AmazonClient;
 import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
 import com.example.demo.model.Users;
+import com.example.demo.model.enums.Category;
+import com.example.demo.model.enums.Dorm;
+import com.example.demo.model.enums.Status;
 import com.example.demo.repository.PhotoRepository;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,17 @@ public class ProductController {
     @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping("/filter")
+    public List<Product> getFilteredProducts(@RequestParam(required = false) String searchQuery,
+                                             @RequestParam(required = false) String filterCategory,
+                                             @RequestParam(required = false) String filterDorm,
+                                             @RequestParam(required = false) String filterStatus,
+                                             @RequestParam(defaultValue = "asc") String sortOrder,
+                                             @RequestParam(defaultValue = "name") String orderBy) {
+        System.out.println("-------------------------");
+        return productService.getFilteredProducts(searchQuery, filterCategory, filterDorm, filterStatus, sortOrder, orderBy);
     }
 
     @GetMapping("/{id}")

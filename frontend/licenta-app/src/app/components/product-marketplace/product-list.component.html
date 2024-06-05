@@ -1,32 +1,88 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Marketplace</h1>
+        <h1>Enhanced Search</h1>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4" *ngFor="let product of products">
-        <div class="card">
-          <img [src]="product.imageSrc" *ngIf="product.imageSrc" class="card-img-top" alt="Product Image">
-          <div class="card-header">
-            <h5 class="card-title">{{ product.name }}</h5>
+  <div class="card card-primary card-outline">
+    <div class="card-body">
+      <form (ngSubmit)="onSearch()">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="resultType">Search:</label>
+            <input type="text" class="form-control" id="resultType" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Product name">
           </div>
-          <div class="card-body">
-            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
-            <p class="card-text"><strong>Dorm:</strong> {{ product.dorm }}</p>
-            <p class="card-text"><strong>Status:</strong> {{ product.status }}</p>
-            <a [routerLink]="['/product-details', product.id]" class="btn btn-info">More Info</a>
+          <div class="form-group col-md-3">
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" [(ngModel)]="filterCategory" name="filterCategory" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="dorm">Dorm:</label>
+            <select class="form-control" id="dorm" [(ngModel)]="filterDorm" name="filterDorm" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" [(ngModel)]="filterStatus" name="filterStatus" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="sortOrder">Sort Order:</label>
+            <select class="form-control" id="sortOrder" [(ngModel)]="sortOrder" name="sortOrder" (change)="onSortOrderChange()">
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="orderBy">Order By:</label>
+            <select class="form-control" id="orderBy" [(ngModel)]="orderBy" name="orderBy" (change)="onOrderByChange()">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3 align-self-end">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let product of products">
+          <div class="card">
+            <img [src]="product.imageSrc" *ngIf="product.imageSrc" class="card-img-top" alt="Product Image">
+            <div class="card-header">
+              <h5 class="card-title">{{ product.name }}</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+              <p class="card-text"><strong>Dorm:</strong> {{ product.dorm }}</p>
+              <p class="card-text"><strong>Status:</strong> {{ product.status }}</p>
+              <a [routerLink]="['/product-details', product.id]" class="btn btn-info">More Info</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </section>

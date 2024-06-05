@@ -8,6 +8,17 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductListComponent implements OnInit {
   products: any[] = [];
+  searchQuery: string = '';
+  filterCategory: string = '';
+  filterDorm: string = '';
+  filterStatus: string = '';
+  sortOrder: string = 'asc';
+  orderBy: string = 'name';
+
+  categories: string[] = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD'];
+  dorms: string[] = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_19', 'CAMIN_20', 'CAMIN_22'];
+  statuses: string[] = ['AVAILABLE', 'SOLD'];
+
 
   constructor(private productService: ProductService) { }
 
@@ -21,5 +32,39 @@ export class ProductListComponent implements OnInit {
         });
       });
     });
+  }
+
+  getFilteredProducts(): void {
+    this.productService.getFilteredProducts(
+      this.searchQuery || '',
+      this.filterCategory || '',
+      this.filterDorm || '',
+      this.filterStatus || '',
+      this.sortOrder,
+      this.orderBy
+    ).subscribe(data => {
+        this.products = data;
+        this.products.forEach(product => {
+          this.productService.downloadFile(product.id).subscribe((blob: Blob) => {
+            let objectURL = URL.createObjectURL(blob);
+            product.imageSrc = objectURL;
+          });
+        });
+      });
+  }
+  onSearch(): void {
+    this.getFilteredProducts();
+  }
+
+  onSortOrderChange(): void {
+    this.getFilteredProducts();
+  }
+
+  onOrderByChange(): void {
+    this.getFilteredProducts();
+  }
+
+  onFilterChange(): void {
+    this.getFilteredProducts();
   }
 }

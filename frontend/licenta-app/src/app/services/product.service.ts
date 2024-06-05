@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,18 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
+  }
+
+  getFilteredProducts(searchQuery: string, filterCategory: string, filterDorm: string, filterStatus: string, sortOrder: string, orderBy: string): Observable<Product[]> {
+    let params = new HttpParams();
+    if (searchQuery) params = params.append('searchQuery', searchQuery);
+    if (filterCategory) params = params.append('filterCategory', filterCategory);
+    if (filterDorm) params = params.append('filterDorm', filterDorm);
+    if (filterStatus) params = params.append('filterStatus', filterStatus);
+    params = params.append('sortOrder', sortOrder);
+    params = params.append('orderBy', orderBy);
+
+    return this.http.get<Product[]>(`${this.apiUrl}/filter`, { params });
   }
 
   addProduct(product: Product): Observable<Product> {
