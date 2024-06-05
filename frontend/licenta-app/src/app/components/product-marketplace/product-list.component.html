@@ -2,36 +2,59 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Enhanced Search</h1>
+        <h1>Product MarketPlace</h1>
       </div>
     </div>
   </div>
 </section>
 
 <section class="content">
-  <div class="card card-primary card-outline">
+  <div class="card card-primary card-outline custom-card">
     <div class="card-body">
       <form (ngSubmit)="onSearch()">
         <div class="form-row">
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-8">
             <label for="resultType">Search:</label>
-            <input type="text" class="form-control" id="resultType" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Product name">
+            <div class="input-group">
+              <input type="text" class="form-control" id="resultType" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Product name">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-info">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
+            <label for="sortOrder">Sort Order:</label>
+            <select class="form-control" id="sortOrder" [(ngModel)]="sortOrder" name="sortOrder" (change)="onSortOrderChange()">
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="orderBy">Order By:</label>
+            <select class="form-control" id="orderBy" [(ngModel)]="orderBy" name="orderBy" (change)="onOrderByChange()">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
             <label for="category">Category:</label>
             <select class="form-control" id="category" [(ngModel)]="filterCategory" name="filterCategory" (change)="onFilterChange()">
               <option value="">Any</option>
               <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
             </select>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-4">
             <label for="dorm">Dorm:</label>
             <select class="form-control" id="dorm" [(ngModel)]="filterDorm" name="filterDorm" (change)="onFilterChange()">
               <option value="">Any</option>
               <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
             </select>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-4">
             <label for="status">Status:</label>
             <select class="form-control" id="status" [(ngModel)]="filterStatus" name="filterStatus" (change)="onFilterChange()">
               <option value="">Any</option>
@@ -39,30 +62,9 @@
             </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="sortOrder">Sort Order:</label>
-            <select class="form-control" id="sortOrder" [(ngModel)]="sortOrder" name="sortOrder" (change)="onSortOrderChange()">
-              <option value="asc">ASC</option>
-              <option value="desc">DESC</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="orderBy">Order By:</label>
-            <select class="form-control" id="orderBy" [(ngModel)]="orderBy" name="orderBy" (change)="onOrderByChange()">
-              <option value="name">Name</option>
-              <option value="price">Price</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3 align-self-end">
-            <button type="submit" class="btn btn-primary">Search</button>
-          </div>
-        </div>
       </form>
     </div>
   </div>
-
-
 
   <!-- Main content -->
   <section class="content">
