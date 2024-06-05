@@ -1,0 +1,77 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit Auction</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/my-auctions">My Auctions</a></li>
+          <li class="breadcrumb-item active">Edit Auction</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="card card-solid" *ngIf="auction">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <h3 class="d-inline-block d-sm-none">{{ auction.product.name }}</h3>
+          <div class="col-12">
+            <img [src]="imageSrc" *ngIf="imageSrc" class="product-image" alt="Product Image">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" class="form-control" [(ngModel)]="auction.product.name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="productDescription">Description</label>
+              <textarea id="productDescription" class="form-control" [(ngModel)]="auction.product.description" name="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <select id="productCategory" class="form-control" [(ngModel)]="auction.product.category" name="category">
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productDorm">Dorm</label>
+              <select id="productDorm" class="form-control" [(ngModel)]="auction.product.dorm" name="dorm">
+                <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactInfo">Contact Info</label>
+              <input type="text" id="contactInfo" class="form-control" [(ngModel)]="auction.product.contactInfo" name="contactInfo">
+            </div>
+            <div class="form-group">
+              <label for="startPrice">Starting Price</label>
+              <input type="number" id="startPrice" class="form-control" [(ngModel)]="auction.startPrice" name="startPrice">
+            </div>
+            <div class="form-group">
+              <label for="endDate">End Date</label>
+              <input type="date" id="endDate" class="form-control" [(ngModel)]="auction.endDate" name="endDate">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-flat">
+              <i class="fas fa-save fa-lg mr-2"></i>
+              Save Modifications
+            </button>
+            <button type="button" (click)="onDelete()" class="btn btn-danger btn-lg btn-flat">
+              <i class="fas fa-trash fa-lg mr-2"></i>
+              Delete Auction
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
