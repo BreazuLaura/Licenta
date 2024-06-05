@@ -63,10 +63,15 @@ public class AuctionController {
         return auctionService.getAllAuctions();
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/my-auctions/{userId}")
     public ResponseEntity<List<Auction>> getUserAuctions(@PathVariable Long userId) {
         List<Auction> auctions = auctionService.getAuctionsByUserId(userId);
         return ResponseEntity.ok(auctions);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Auction> getAuctionById(@PathVariable Long id) {
+        Auction auction = auctionService.getAuctionById(id);
+        return ResponseEntity.ok(auction);
+    }
 }

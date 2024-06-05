@@ -45,4 +45,12 @@ export class MyAuctionsComponent implements OnInit {
   goToAddAuction(): void {
     this.router.navigate(['/add-auction']);
   }
+
+  editAuction(auction: any): void {
+    this.router.navigate(['/edit-auction', auction.id]);
+  }
+
+  stopAuction(auction: any): void {
+    // Implement logic to stop auction
+  }
 }

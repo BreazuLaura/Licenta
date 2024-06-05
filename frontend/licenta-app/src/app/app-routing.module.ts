@@ -16,6 +16,7 @@ import {ChatComponent} from "./components/chat/chat.component";
 import {EditProductComponent} from "./components/edit-product/edit-product.component";
 import {AddAuctionComponent} from "./components/add-auction/add-auction.component";
 import {MyAuctionsComponent} from "./components/my-auctions/my-auctions.component";
+import {EditAuctionComponent} from "./components/edit-auction/edit-auction.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -34,7 +35,9 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent},
   { path: 'edit-product/:id', component: EditProductComponent},
   { path: 'my-auctions', component: MyAuctionsComponent },
-  { path: 'add-auction', component: AddAuctionComponent }
+  { path: 'add-auction', component: AddAuctionComponent },
+  { path: 'edit-auction/:id', component: EditAuctionComponent },
+
 
 ];
 

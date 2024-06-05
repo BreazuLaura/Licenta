@@ -26,6 +26,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyAuctionsComponent } from './components/my-auctions/my-auctions.component';
 import { AddAuctionComponent } from './components/add-auction/add-auction.component';
+import { EditAuctionComponent } from './components/edit-auction/edit-auction.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AddAuctionComponent } from './components/add-auction/add-auction.compon
     EditProductComponent,
     MyAuctionsComponent,
     AddAuctionComponent,
+    EditAuctionComponent,
   ],
   imports: [
     BrowserModule,
