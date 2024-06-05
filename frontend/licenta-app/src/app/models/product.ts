@@ -4,4 +4,9 @@ export interface Product {
   price: number;
   description: string;
   contactInfo: string;
+  category: string;
+  status: string;
+  saleType: string;
+  dorm: string;
 }
+

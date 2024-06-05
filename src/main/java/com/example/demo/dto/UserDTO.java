@@ -1,6 +1,9 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.Product;
+import com.example.demo.model.enums.Dorm;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.util.List;
 
@@ -11,6 +14,9 @@ public class UserDTO {
     private String email;
     private String password;
     private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    private Dorm dorm;
 
 
 // getters and setters
@@ -56,7 +62,13 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public Dorm getDorm() {
+        return dorm;
+    }
 
+    public void setDorm(Dorm dorm) {
+        this.dorm = dorm;
+    }
 
     public UserDTO() {
     }
@@ -69,6 +81,15 @@ public class UserDTO {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+    }
+
+    public UserDTO(String firstName, String lastName, String email, String password, String phoneNumber, Dorm dorm) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.dorm = dorm;
     }
 }
 

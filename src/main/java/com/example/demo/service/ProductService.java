@@ -5,9 +5,12 @@ import com.example.demo.model.AmazonClient;
 import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
 import com.example.demo.model.Users;
+import com.example.demo.model.enums.SaleType;
+import com.example.demo.model.enums.Status;
 import com.example.demo.repository.PhotoRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +42,9 @@ public class ProductService {
     public Product createProduct(ProductDTO productDTO, Long userId, MultipartFile file) {
         // Create and save the product
         Users user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), user);
+        Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), user, productDTO.getCategory(), productDTO.getSaleType(), productDTO.getDorm());
+        product.setStatus(Status.AVAILABLE);
+        product.setSaleType(SaleType.MARKETPLACE);
 
         Product savedProduct = productRepository.save(product);
 
@@ -59,12 +64,16 @@ public class ProductService {
         existingProduct.setPrice(product.getPrice());
         existingProduct.setDescription(product.getDescription());
         existingProduct.setContactInfo(product.getContactInfo());
+        existingProduct.setDorm(product.getDorm());
+        existingProduct.setCategory(product.getCategory());
         return productRepository.save(existingProduct);
     }
 
 
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    @Transactional
+    public void deleteProduct(Long productId) {
+        photoRepository.deleteByProductId(productId);
+        productRepository.deleteById(productId);
     }
 
     public List<Product> getProductsByUserId(Long userId) {

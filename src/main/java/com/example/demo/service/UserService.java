@@ -16,7 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public Users saveUser(UserDTO userDTO) {
-        Users users = new Users(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber());
+        Users users = new Users(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getPhoneNumber(), userDTO.getDorm());
         return userRepository.save(users);
     }
 
@@ -46,6 +46,7 @@ public class UserService {
         users.setEmail(usersDetails.getEmail());
         users.setPassword(usersDetails.getPassword());
         users.setPhoneNumber(usersDetails.getPhoneNumber());
+        users.setDorm(usersDetails.getDorm());
 
         return userRepository.save(users);
     }

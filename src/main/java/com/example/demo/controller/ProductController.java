@@ -74,7 +74,6 @@ public class ProductController {
 
     @GetMapping("/photo/{id}")
     public ResponseEntity<Object> getProductPhoto(@PathVariable Long id) {
-        System.out.println("------------------");
         try {
             Product product = productService.getProductById(id);
             List<Photo> photos = photoRepository.findByProductId(id);

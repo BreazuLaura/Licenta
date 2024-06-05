@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.model.enums.Dorm;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,6 +21,9 @@ public class Users {
     @OneToMany(mappedBy = "owner")
     @JsonIgnore
     private List<Product> products;
+
+    @Enumerated(EnumType.STRING)
+    private Dorm dorm;
 
     // getters and setters
 
@@ -80,6 +84,14 @@ public class Users {
         this.products = products;
     }
 
+    public Dorm getDorm() {
+        return dorm;
+    }
+
+    public void setDorm(Dorm dorm) {
+        this.dorm = dorm;
+    }
+
     public Users() {
     }
 
@@ -98,6 +110,25 @@ public class Users {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Users(String firstName, String lastName, String email, String password, String phoneNumber, List<Product> products, Dorm dorm) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.products = products;
+        this.dorm = dorm;
+    }
+
+    public Users(String firstName, String lastName, String email, String password, String phoneNumber, Dorm dorm) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.dorm = dorm;
     }
 }
 
