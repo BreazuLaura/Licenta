@@ -14,15 +14,17 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
-      <div *ngFor="let product of products" class="col-lg-3 col-md-4 col-sm-6">
+      <div class="col-md-4" *ngFor="let product of products">
         <div class="card">
-          <div class="card-body">
-            <img [src]="product.imageSrc" *ngIf="product.imageSrc" class="card-img-top" alt="Product Image">
+          <img [src]="product.imageSrc" *ngIf="product.imageSrc" class="card-img-top" alt="Product Image">
+          <div class="card-header">
             <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.description }}</p>
-            <p class="card-text"><strong>Price: </strong>{{ product.price }}</p>
-            <p class="card-text"><strong>Contact: </strong>{{ product.contactInfo }}</p>
-            <a [routerLink]="['/edit-product', product.id]" class="btn btn-primary">Edit Product</a>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+            <p class="card-text"><strong>Dorm:</strong> {{ product.dorm }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ product.status }}</p>
+            <a [routerLink]="['/edit-product', product.id]" class="btn btn-info">Edit Product</a>
           </div>
         </div>
       </div>

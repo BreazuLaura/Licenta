@@ -41,6 +41,22 @@
               <label for="productPrice">Price (RON)</label>
               <input type="number" id="productPrice" class="form-control" [(ngModel)]="product.price" name="price">
             </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <select id="productCategory" class="form-control" [(ngModel)]="product.category" name="category">
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productDorm">Dorm</label>
+              <select id="productDorm" class="form-control" [(ngModel)]="product.dorm" name="dorm">
+                <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactInfo">Contact Info</label>
+              <input type="text" id="contactInfo" class="form-control" [(ngModel)]="product.contactInfo" name="contactInfo">
+            </div>
             <button type="submit" class="btn btn-primary btn-lg btn-flat">
               <i class="fas fa-save fa-lg mr-2"></i>
               Save Modifications
