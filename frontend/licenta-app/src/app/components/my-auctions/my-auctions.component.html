@@ -1,0 +1,46 @@
+<!-- my-auctions.component.html -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>My Auctions</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+          <li class="breadcrumb-item active">My Auctions</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-12 text-right">
+        <button class="btn btn-primary" (click)="goToAddAuction()">
+          <i class="fas fa-plus"></i> Add Auction
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let auction of auctions">
+        <div class="card">
+          <img [src]="auction.imageSrc" class="card-img-top" alt="Product Image">
+          <div class="card-header">
+            <h5 class="card-title">{{ auction.product.name }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Price:</strong> ${{ auction.startPrice }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ auction.product.description }}</p>
+            <p class="card-text"><strong>Dorm:</strong> {{ auction.product.dorm }}</p>
+            <p class="card-text"><strong>Category:</strong> {{ auction.product.category }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ auction.product.status }}</p>
+            <p class="card-text"><strong>End Date:</strong> {{ auction.endDate | date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

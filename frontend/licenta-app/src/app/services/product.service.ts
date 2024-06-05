@@ -32,6 +32,10 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product);
   }
 
+  createProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product);
+  }
+
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
@@ -46,7 +50,7 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  downloadFile(id: number): Observable<Blob> {
+  downloadFile(id: any): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/photo/${id}`, { responseType: 'blob' });
   }
 }

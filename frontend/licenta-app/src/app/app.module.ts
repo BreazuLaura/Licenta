@@ -24,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './components/chat/chat.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MyAuctionsComponent } from './components/my-auctions/my-auctions.component';
+import { AddAuctionComponent } from './components/add-auction/add-auction.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ContactSellerComponent,
     ChatComponent,
     EditProductComponent,
+    MyAuctionsComponent,
+    AddAuctionComponent,
   ],
   imports: [
     BrowserModule,

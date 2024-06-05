@@ -14,6 +14,8 @@ import {MyProfileComponent} from "./components/my-profile/my-profile.component";
 import {PhotoViewerComponent} from "./components/photo-viewer/photo-viewer.component";
 import {ChatComponent} from "./components/chat/chat.component";
 import {EditProductComponent} from "./components/edit-product/edit-product.component";
+import {AddAuctionComponent} from "./components/add-auction/add-auction.component";
+import {MyAuctionsComponent} from "./components/my-auctions/my-auctions.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,7 +32,9 @@ const routes: Routes = [
   { path: 'my-profile/:id', component: MyProfileComponent},
   { path: 'viewer', component: PhotoViewerComponent},
   { path: 'chat', component: ChatComponent},
-  { path: 'edit-product/:id', component: EditProductComponent}
+  { path: 'edit-product/:id', component: EditProductComponent},
+  { path: 'my-auctions', component: MyAuctionsComponent },
+  { path: 'add-auction', component: AddAuctionComponent }
 
 ];
 

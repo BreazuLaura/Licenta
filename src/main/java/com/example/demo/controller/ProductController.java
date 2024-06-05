@@ -53,7 +53,6 @@ public class ProductController {
                                              @RequestParam(required = false) String filterStatus,
                                              @RequestParam(defaultValue = "asc") String sortOrder,
                                              @RequestParam(defaultValue = "name") String orderBy) {
-        System.out.println("-------------------------");
         return productService.getFilteredProducts(searchQuery, filterCategory, filterDorm, filterStatus, sortOrder, orderBy);
     }
 
@@ -66,7 +65,6 @@ public class ProductController {
     public Product createProduct(@RequestPart("product") ProductDTO productDTO,
                                  @RequestPart("file") MultipartFile file,
                                  @PathVariable Long userId)  throws IOException {
-        System.out.println("aaa");
         return productService.createProduct(productDTO, userId, file);
     }
 

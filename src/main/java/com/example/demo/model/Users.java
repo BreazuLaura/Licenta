@@ -25,6 +25,9 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private Dorm dorm;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Service> services;
+
     // getters and setters
 
 
@@ -90,6 +93,14 @@ public class Users {
 
     public void setDorm(Dorm dorm) {
         this.dorm = dorm;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     public Users() {

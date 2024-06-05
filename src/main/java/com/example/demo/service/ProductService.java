@@ -34,7 +34,7 @@ public class ProductService {
     private PhotoRepository photoRepository;
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAll().stream().filter(product -> (product.getSaleType() == SaleType.MARKETPLACE)).collect(Collectors.toList());
     }
 
     public Product getProductById(Long id) {
@@ -45,8 +45,12 @@ public class ProductService {
         // Create and save the product
         Users user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), user, productDTO.getCategory(), productDTO.getSaleType(), productDTO.getDorm());
-        product.setStatus(Status.AVAILABLE);
-        product.setSaleType(SaleType.MARKETPLACE);
+//        if(productDTO.getStatus() == null)
+//            product.setStatus(Status.AVAILABLE);
+//        else product.setStatus(productDTO.getStatus());
+//        if(productDTO.getSaleType() == null)
+//            product.setSaleType(SaleType.MARKETPLACE);
+//        else product.setSaleType(productDTO.getSaleType());
 
         Product savedProduct = productRepository.save(product);
 
@@ -79,7 +83,8 @@ public class ProductService {
     }
 
     public List<Product> getProductsByUserId(Long userId) {
-        return productRepository.findByOwnerId(userId);
+
+        return productRepository.findByOwnerId(userId).stream().filter(product -> (product.getSaleType() == SaleType.MARKETPLACE)).collect(Collectors.toList());
     }
 
     public Users getSellerOfProduct(Long productId) throws ValidationException {
@@ -97,6 +102,7 @@ public class ProductService {
                 .filter(product -> (filterCategory == null || filterCategory.isEmpty() || (product.getCategory() != null && product.getCategory().name().equalsIgnoreCase(filterCategory))))
                 .filter(product -> (filterDorm == null || filterDorm.isEmpty() || (product.getDorm() != null && product.getDorm().name().equalsIgnoreCase(filterDorm))))
                 .filter(product -> (filterStatus == null || filterStatus.isEmpty() || (product.getStatus() != null && product.getStatus().name().equalsIgnoreCase(filterStatus))))
+                .filter(product -> (product.getSaleType() == SaleType.MARKETPLACE))
                 .sorted((p1, p2) -> {
                     if ("price".equalsIgnoreCase(orderBy)) {
                         return "asc".equalsIgnoreCase(sortOrder) ? Double.compare(p1.getPrice(), p2.getPrice()) : Double.compare(p2.getPrice(), p1.getPrice());

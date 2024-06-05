@@ -27,16 +27,21 @@ public class Product {
     private Users owner;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Photo> photos;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Auction auction;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.AVAILABLE;;
 
     @Enumerated(EnumType.STRING)
-    private SaleType saleType;
+    private SaleType saleType = SaleType.MARKETPLACE;
 
     @Enumerated(EnumType.STRING)
     private Dorm dorm;
@@ -71,6 +76,20 @@ public class Product {
         this.contactInfo = contactInfo;
         this.owner = owner;
         this.category = category;
+        this.saleType = saleType;
+        this.dorm = dorm;
+    }
+
+    public Product(String name, double price, String description, String contactInfo, Users owner, List<Photo> photos, Auction auction, Category category, Status status, SaleType saleType, Dorm dorm) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.contactInfo = contactInfo;
+        this.owner = owner;
+        this.photos = photos;
+        this.auction = auction;
+        this.category = category;
+        this.status = status;
         this.saleType = saleType;
         this.dorm = dorm;
     }
@@ -154,6 +173,22 @@ public class Product {
 
     public void setDorm(Dorm dorm) {
         this.dorm = dorm;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 }
 
