@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuctionService } from '../../services/auction.service';
-import { ProductService } from '../../services/product.service';
-import { Auction } from '../../models/auction';
-import { Category, Dorm } from '../../models/enums';
+import { AuctionService } from '../../../services/auction.service';
+import { ProductService } from '../../../services/product.service';
+import { Auction } from '../../../models/auction';
+import { Category, Dorm } from '../../../models/enums';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import {User} from "../../models/user";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-edit-auction',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-import { AuctionService } from '../../services/auction.service';
-import { AuctionFormDTO } from '../../models/auction-form-dto.model';
-import { Category, Dorm, SaleType, Status } from '../../models/enums';
+import { ProductService } from '../../../services/product.service';
+import { AuctionService } from '../../../services/auction.service';
+import { AuctionFormDTO } from '../../../models/auction-form-dto.model';
+import { Category, Dorm, SaleType, Status } from '../../../models/enums';
 import { NgForm } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
 

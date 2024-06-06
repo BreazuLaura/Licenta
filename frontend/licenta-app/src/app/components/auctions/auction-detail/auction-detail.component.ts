@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { AuctionService } from '../../services/auction.service';
-import { Auction } from '../../models/auction';
+import { AuctionService } from '../../../services/auction.service';
+import { Auction } from '../../../models/auction';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { FileService } from '../../services/file.service';
+import { FileService } from '../../../services/file.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ContactSellerComponent } from '../contact-seller/contact-seller.component';
-import {ProductService} from "../../services/product.service";
-import {BidService} from "../../services/bid.service";
+import { ContactSellerComponent } from '../../contact-seller/contact-seller.component';
+import {ProductService} from "../../../services/product.service";
+import {BidService} from "../../../services/bid.service";
 import {BidPopupComponent} from "../bid-popup/bid-popup.component";
 
 @Component({

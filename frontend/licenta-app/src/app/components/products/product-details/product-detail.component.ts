@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../models/product';
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {FileService} from "../../services/file.service";
-import { SellerService } from '../../services/seller.service'; // Import the SellerService
+import {FileService} from "../../../services/file.service";
+import { SellerService } from '../../../services/seller.service'; // Import the SellerService
 import { MatDialog } from '@angular/material/dialog';
-import {ContactSellerComponent} from "../contact-seller/contact-seller.component";
+import {ContactSellerComponent} from "../../contact-seller/contact-seller.component";
 
 
 @Component({

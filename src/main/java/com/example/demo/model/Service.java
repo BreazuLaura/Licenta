@@ -6,6 +6,7 @@ import com.example.demo.model.enums.ServiceStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Service {
@@ -30,9 +31,6 @@ public class Service {
     @Column(nullable = false)
     private ServiceCategory category;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ServiceStatus status;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -41,6 +39,9 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Users owner;
+
+    @OneToMany(mappedBy = "service")
+    private List<Appointment> appointments;
 
     // Getters and Setters
     public Long getId() {
@@ -84,13 +85,6 @@ public class Service {
         this.category = category;
     }
 
-    public ServiceStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ServiceStatus status) {
-        this.status = status;
-    }
 
     public Dorm getDorm() {
         return dorm;
@@ -108,23 +102,37 @@ public class Service {
         this.owner = owner;
     }
 
-    public Service(Long id, String name, String description, BigDecimal price, ServiceCategory category, ServiceStatus status, Dorm dorm, Users owner) {
+    public Float getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Float duration) {
+        this.duration = duration;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public Service(Long id, String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.status = status;
         this.dorm = dorm;
         this.owner = owner;
     }
 
-    public Service(String name, String description, BigDecimal price, ServiceCategory category, ServiceStatus status, Dorm dorm, Users owner) {
+    public Service(String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.status = status;
         this.dorm = dorm;
         this.owner = owner;
     }

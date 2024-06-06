@@ -1,10 +1,10 @@
 // my-auctions.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuctionService } from '../../services/auction.service';
-import { Auction } from '../../models/auction';
+import { AuctionService } from '../../../services/auction.service';
+import { Auction } from '../../../models/auction';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import {ProductService} from "../../services/product.service";
+import {ProductService} from "../../../services/product.service";
 import {StopAuctionModalComponent} from "../stop-auction-modal/stop-auction-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 

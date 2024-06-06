@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         name = "Licence name",
                         url = "https://some-url.com"
                 ),
-                termsOfService = "Terms of service"
+                termsOfService = "Terms of service.ts"
         ),
         servers = {
                 @Server(

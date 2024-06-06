@@ -1,6 +1,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~admin-lte/dist/css/adminlte.min.css';
 
+
 /* Adjust content wrapper based on sidebar state */
 .content-wrapper {
   margin-left: 250px;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuctionService } from '../../services/auction.service';
-import { ProductService } from '../../services/product.service';
-import { Auction } from '../../models/auction';
+import { AuctionService } from '../../../services/auction.service';
+import { ProductService } from '../../../services/product.service';
+import { Auction } from '../../../models/auction';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Auction } from '../../models/auction'; // Adjust the path as necessary
+import { Auction } from '../../../models/auction'; // Adjust the path as necessary
 import { MatSnackBar } from '@angular/material/snack-bar'; // Add this import for notifications
 
 @Component({

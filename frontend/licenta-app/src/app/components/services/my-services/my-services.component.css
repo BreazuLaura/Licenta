@@ -1,0 +1,21 @@
+.container {
+  padding: 20px;
+}
+
+#external-events {
+  padding: 10px;
+  width: 150px;
+  height: 300px;
+  overflow: auto;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.external-event {
+  margin: 10px 0;
+  padding: 5px;
+  background: #3c8dbc;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}

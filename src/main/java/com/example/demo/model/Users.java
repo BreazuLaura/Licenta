@@ -28,6 +28,12 @@ public class Users {
     @OneToMany(mappedBy = "owner")
     private List<Service> services;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Appointment> ownedAppointments;
+
+    @OneToMany(mappedBy = "buyer")
+    private List<Appointment> boughtAppointments;
+
     // getters and setters
 
 
@@ -101,6 +107,22 @@ public class Users {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public List<Appointment> getOwnedAppointments() {
+        return ownedAppointments;
+    }
+
+    public void setOwnedAppointments(List<Appointment> ownedAppointments) {
+        this.ownedAppointments = ownedAppointments;
+    }
+
+    public List<Appointment> getBoughtAppointments() {
+        return boughtAppointments;
+    }
+
+    public void setBoughtAppointments(List<Appointment> boughtAppointments) {
+        this.boughtAppointments = boughtAppointments;
     }
 
     public Users() {
