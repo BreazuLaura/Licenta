@@ -3,3 +3,35 @@
   max-height: 400px;
   object-fit: cover;
 }
+
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.btn-flat {
+  margin-top: 15px;
+}
+
+.auction-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.auction-details h4 {
+  margin-bottom: 0.5em;
+}
+
+.btn-lg {
+  width: 100%;
+  margin-top: 10px;
+}

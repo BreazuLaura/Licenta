@@ -29,6 +29,9 @@ import { AddAuctionComponent } from './components/add-auction/add-auction.compon
 import { EditAuctionComponent } from './components/edit-auction/edit-auction.component';
 import { AuctionsMarketplaceComponent } from './components/auctions-marketplace/auctions-marketplace.component';
 import { AuctionDetailComponent } from './components/auction-detail/auction-detail.component';
+import { BidPopupComponent } from './components/bid-popup/bid-popup.component';
+import {MatInputModule} from "@angular/material/input";
+
 
 
 @NgModule({
@@ -54,6 +57,7 @@ import { AuctionDetailComponent } from './components/auction-detail/auction-deta
     EditAuctionComponent,
     AuctionsMarketplaceComponent,
     AuctionDetailComponent,
+    BidPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { AuctionDetailComponent } from './components/auction-detail/auction-deta
     RouterModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

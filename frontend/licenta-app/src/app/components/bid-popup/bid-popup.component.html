@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Place Your Bid</h2>
+<mat-dialog-content>
+  <form #bidForm="ngForm">
+    <mat-form-field>
+      <mat-label>Bid Amount</mat-label>
+      <input matInput type="number" [(ngModel)]="bidAmount" name="bidAmount" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSaveBid()" [disabled]="!bidForm.form.valid">Save Bid</button>
+</mat-dialog-actions>

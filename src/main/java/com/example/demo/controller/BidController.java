@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.BidDTO;
 import com.example.demo.model.Bid;
 import com.example.demo.service.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,11 +26,6 @@ public class BidController {
         return bidService.getBidById(id);
     }
 
-    @PostMapping
-    public Bid createBid(@RequestBody Bid bid) {
-        return bidService.createBid(bid);
-    }
-
     @PutMapping("/{id}")
     public Bid updateBid(@PathVariable Long id, @RequestBody Bid bid) {
         return bidService.updateBid(id, bid);
@@ -37,5 +34,11 @@ public class BidController {
     @DeleteMapping("/{id}")
     public void deleteBid(@PathVariable Long id) {
         bidService.deleteBid(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Bid> placeBid(@RequestBody BidDTO bidDTO) {
+        Bid bid = bidService.placeBid(bidDTO);
+        return ResponseEntity.ok(bid);
     }
 }

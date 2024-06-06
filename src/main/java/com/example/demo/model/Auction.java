@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.*;
@@ -30,13 +31,16 @@ public class Auction {
 
     @OneToOne
     @JoinColumn(name = "current_bid_id", nullable = true)
+    @JsonIgnore
     private Bid currentHighestBid;
 
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Bid> bids;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = true)
+    @JsonIgnore
     private Users owner;
 
     // Getters and Setters
