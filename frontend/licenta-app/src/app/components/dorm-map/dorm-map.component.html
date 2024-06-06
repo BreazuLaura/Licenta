@@ -1,0 +1,9 @@
+<div id="map-container">
+  <div id="map"></div>
+  <div id="search-bar">
+    <select [(ngModel)]="selectedDorm" (change)="filterDorms()">
+      <option value="">All Dorms</option>
+      <option *ngFor="let dorm of dorms" [value]="dorm.name">{{ dorm.name }}</option>
+    </select>
+  </div>
+</div>

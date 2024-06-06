@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'edit-auction/:id', component: EditAuctionComponent },
   { path: 'auctionplace', component: AuctionsMarketplaceComponent },
   { path: 'auction-details/:id', component: AuctionDetailComponent },
-  { path: 'dorm-map', component: DormMapComponent },
+  { path: 'dorm-map', component: DormMapComponent }
 
 
 
