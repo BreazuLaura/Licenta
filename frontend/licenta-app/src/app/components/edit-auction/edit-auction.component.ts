@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { Auction } from '../../models/auction';
 import { Category, Dorm } from '../../models/enums';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-edit-auction',
@@ -16,6 +17,8 @@ export class EditAuctionComponent implements OnInit {
   categories = Object.values(Category);
   dorms = Object.values(Dorm);
   imageSrc?: SafeUrl;
+  imageError = false;  // Add this property
+
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +33,10 @@ export class EditAuctionComponent implements OnInit {
     this.auctionService.getAuctionById(auctionId).subscribe(auction => {
       this.auction = auction;
       this.loadImage(auction.product.id);
+
+      if (this.auction.bids) {
+        this.auction.bids.sort((a, b) => (b.amount ?? 0) - (a.amount ?? 0));
+      }
     });
   }
 
@@ -69,4 +76,12 @@ export class EditAuctionComponent implements OnInit {
       );
     }
   }
+
+  getUserInitials(user: User | undefined): string {  // Change the parameter type to handle undefined
+    if (!user) return '';
+    const firstNameInitial = user.firstName ? user.firstName.charAt(0).toUpperCase() : '';
+    const lastNameInitial = user.lastName ? user.lastName.charAt(0).toUpperCase() : '';
+    return `${firstNameInitial}${lastNameInitial}`;
+  }
+
 }

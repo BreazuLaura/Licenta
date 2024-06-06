@@ -75,3 +75,46 @@
     </div>
   </div>
 </section>
+
+<div class="card">
+  <div class="card-header border-0">
+    <h1 class="card-title">Bids</h1>
+  </div>
+  <div class="card-body table-responsive p-0" >
+    <table class="table table-striped table-valign-middle">
+      <thead>
+      <tr>
+        <th>Bidder</th>
+        <th>Price offer</th>
+        <th>Price increase</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bid of auction?.bids">
+        <td>
+          <div class="user-image-container">
+            <img [src]="'dist/img/default-150x150.png'" alt="User Image" class="img-circle img-size-32 mr-2"
+                 (error)="imageError = true" *ngIf="!imageError; else initials">
+            <ng-template #initials>
+              <div class="initials-circle">
+                {{ getUserInitials(bid.user) }}
+              </div>
+            </ng-template>
+            {{bid.user?.firstName}} {{bid.user?.lastName}}
+          </div>
+
+        </td>
+        <td>{{ bid.amount }}</td>
+        <td>
+          <small class="text-success mr-1">
+            <i class="fas fa-arrow-up"></i>
+            {{ (100 * ((bid.amount ?? 0) - (auction?.startPrice ?? 1))/(auction?.startPrice ?? 1)) | number:'1.0-2' }}%
+          </small>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- /.card -->

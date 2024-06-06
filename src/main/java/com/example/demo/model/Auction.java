@@ -34,12 +34,10 @@ public class Auction {
     private Bid currentHighestBid;
 
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Bid> bids;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = true)
-    @JsonIgnore
     private Users owner;
 
     // Getters and Setters
