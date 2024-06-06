@@ -45,12 +45,12 @@ public class ProductService {
         // Create and save the product
         Users user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(), productDTO.getContactInfo(), user, productDTO.getCategory(), productDTO.getSaleType(), productDTO.getDorm());
-//        if(productDTO.getStatus() == null)
-//            product.setStatus(Status.AVAILABLE);
-//        else product.setStatus(productDTO.getStatus());
-//        if(productDTO.getSaleType() == null)
-//            product.setSaleType(SaleType.MARKETPLACE);
-//        else product.setSaleType(productDTO.getSaleType());
+        if(productDTO.getStatus() == null)
+            product.setStatus(Status.AVAILABLE);
+        else product.setStatus(productDTO.getStatus());
+        if(productDTO.getSaleType() == null)
+            product.setSaleType(SaleType.MARKETPLACE);
+        else product.setSaleType(productDTO.getSaleType());
 
         Product savedProduct = productRepository.save(product);
 
