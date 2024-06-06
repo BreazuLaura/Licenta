@@ -10,4 +10,5 @@ export interface Auction {
   endDate?: Date;
   currentHighestBid?: Bid;
   bids? : Bid[];
+  endTime? : string;
 }

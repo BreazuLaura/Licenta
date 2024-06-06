@@ -32,29 +32,38 @@ export class AddAuctionComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  onSubmit(form: NgForm): void {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('auction', new Blob([JSON.stringify(this.auction)], { type: 'application/json' }));
-      formData.append('file', this.selectedFile);
+  onSubmit(): void {
+    if (this.auction.endDate && this.auction.endTime) {
+      const endDate = new Date(this.auction.endDate);
+      const [hours, minutes] = this.auction.endTime.split(':').map(Number);
+      endDate.setHours(hours, minutes);
 
-      const userId = localStorage.getItem('userId'); // Get the userId from local storage
+      this.auction.endDate = endDate; // Update endDate with combined DateTime
+    }
 
-      if (userId) {
-        this.auctionService.createAuction(formData, +userId).subscribe(
-          event => {
-            if (event.type === HttpEventType.Response) {
-              console.log('Auction created successfully');
-              this.router.navigate(['/my-auctions']);
+      if (this.selectedFile) {
+        const formData = new FormData();
+        formData.append('auction', new Blob([JSON.stringify(this.auction)], { type: 'application/json' }));
+        formData.append('file', this.selectedFile);
+
+        const userId = localStorage.getItem('userId'); // Get the userId from local storage
+
+        if (userId) {
+          this.auctionService.createAuction(formData, +userId).subscribe(
+            event => {
+              if (event.type === HttpEventType.Response) {
+                console.log('Auction created successfully');
+                this.router.navigate(['/my-auctions']);
+              }
+            },
+            error => {
+              console.error('Error creating auction', error);
             }
-          },
-          error => {
-            console.error('Error creating auction', error);
-          }
-        );
-      } else {
-        console.error('User ID not found in local storage');
+          );
+        } else {
+          console.error('User ID not found in local storage');
+        }
       }
     }
-  }
+
 }

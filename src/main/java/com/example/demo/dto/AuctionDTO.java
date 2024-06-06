@@ -9,6 +9,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AuctionDTO {
@@ -31,7 +32,7 @@ public class AuctionDTO {
 
     private BigDecimal startPrice;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
     public String getName() {
         return name;
@@ -105,15 +106,15 @@ public class AuctionDTO {
         this.startPrice = startPrice;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public AuctionDTO(String name, double price, String description, String contactInfo, Category category, Status status, SaleType saleType, Dorm dorm, BigDecimal startPrice, Date endDate) {
+    public AuctionDTO(String name, double price, String description, String contactInfo, Category category, Status status, SaleType saleType, Dorm dorm, BigDecimal startPrice, LocalDateTime endDate) {
         this.name = name;
         this.price = price;
         this.description = description;

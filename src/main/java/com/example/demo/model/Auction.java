@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class Auction {
     private BigDecimal startPrice;
 
     @Column(nullable = false)
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @Column(nullable = true)
     private Date startDate;
@@ -65,11 +66,11 @@ public class Auction {
         this.startPrice = startPrice;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -105,7 +106,7 @@ public class Auction {
         this.owner = owner;
     }
 
-    public Auction(Product product, BigDecimal startPrice, Date endDate, Date startDate, Bid currentHighestBid, List<Bid> bids) {
+    public Auction(Product product, BigDecimal startPrice, LocalDateTime endDate, Date startDate, Bid currentHighestBid, List<Bid> bids) {
         this.product = product;
         this.startPrice = startPrice;
         this.endDate = endDate;

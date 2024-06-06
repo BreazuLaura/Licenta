@@ -32,6 +32,9 @@ import { AuctionDetailComponent } from './components/auction-detail/auction-deta
 import { BidPopupComponent } from './components/bid-popup/bid-popup.component';
 import {MatInputModule} from "@angular/material/input";
 import { DormMapComponent } from './components/dorm-map/dorm-map.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -70,7 +73,9 @@ import { DormMapComponent } from './components/dorm-map/dorm-map.component';
     BrowserAnimationsModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
