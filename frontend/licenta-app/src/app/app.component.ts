@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription | undefined;
   userName: string | undefined;
   userId: string | null | undefined
+  imageError = false;  // Add this property
+
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -43,5 +45,14 @@ export class AppComponent implements OnInit {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
+  }
+
+  getUserInitials(username: string | undefined): string {  // Change the parameter type to handle undefined
+    if (!username) return '';
+    const nameParts = username.split(' ');
+    const firstNameInitial = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+    const lastNameInitial = nameParts.length > 1 ? nameParts[nameParts.length - 1].charAt(0).toUpperCase() : '';
+
+    return `${firstNameInitial}${lastNameInitial}`;
   }
 }
