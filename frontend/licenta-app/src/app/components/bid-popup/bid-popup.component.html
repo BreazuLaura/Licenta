@@ -1,4 +1,12 @@
-<h2 mat-dialog-title>Place Your Bid</h2>
+<h2 mat-dialog-title>
+  Place Your Bid
+    <div class="text-right">
+      <span class="close-button" (click)="onCancel()">
+        <i class="fas fa-times"></i> <!-- Font Awesome X icon -->
+      </span>
+    </div>
+</h2>
+
 <mat-dialog-content>
   <form #bidForm="ngForm">
     <mat-form-field>
@@ -7,7 +15,7 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="onSaveBid()" [disabled]="!bidForm.form.valid">Save Bid</button>
+  <button mat-raised-button (click)="onSaveBid()" [disabled]="!bidForm.form.valid" color="primary">Save Bid</button>
 </mat-dialog-actions>
