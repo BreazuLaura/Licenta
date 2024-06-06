@@ -31,7 +31,6 @@ public class Auction {
 
     @OneToOne
     @JoinColumn(name = "current_bid_id", nullable = true)
-    @JsonIgnore
     private Bid currentHighestBid;
 
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)

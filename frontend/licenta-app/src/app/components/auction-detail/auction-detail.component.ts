@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AuctionService } from '../../services/auction.service';
 import { Auction } from '../../models/auction';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -25,6 +25,7 @@ export class AuctionDetailComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private productService: ProductService,
     public dialog: MatDialog,
+    private router: Router,
     private bidService: BidService // Inject the BidService
 
   ) { }
@@ -71,11 +72,9 @@ export class AuctionDetailComponent implements OnInit {
           this.bidService.placeBid(bid).subscribe(
             response => {
               console.log('Bid placed successfully:', response);
-              // Update the highest bid in the auction details
-              if (this.auction) {
-                this.auction.currentHighestBid = response.amount;
-              }
-            },
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`/auction-details/${this.auction?.id}`]);
+              });            },
             error => {
               console.error('Error placing bid:', error);
             }

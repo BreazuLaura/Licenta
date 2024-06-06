@@ -37,7 +37,7 @@
             <h4><span class="label">End Date:</span> {{ auction.endDate | date:'mediumDate' }}</h4>
             <div class="bg-gray py-2 px-3 mt-4">
               <h2 class="mb-0">
-                Highest Bid: {{ auction.currentHighestBid ? auction.currentHighestBid : 'No bid yet' }}
+                Highest Bid: {{ auction.currentHighestBid ? auction.currentHighestBid.amount + ' RON' : 'No bid yet' }}
               </h2>
             </div>
           </div>

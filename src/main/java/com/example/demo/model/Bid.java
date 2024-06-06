@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,10 +14,12 @@ public class Bid {
 
     @ManyToOne
     @JoinColumn(name = "auction_id", nullable = false)
+    @JsonIgnore
     private Auction auction;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private Users user;
 
     @Column(nullable = false)
