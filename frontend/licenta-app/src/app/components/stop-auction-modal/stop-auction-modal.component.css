@@ -1,0 +1,22 @@
+.dialog-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dialog-content {
+  margin-bottom: 20px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  margin-right: 10px; /* Add spacing between buttons */
+}
+
+.confirm-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
