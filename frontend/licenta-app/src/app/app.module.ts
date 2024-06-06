@@ -27,6 +27,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyAuctionsComponent } from './components/my-auctions/my-auctions.component';
 import { AddAuctionComponent } from './components/add-auction/add-auction.component';
 import { EditAuctionComponent } from './components/edit-auction/edit-auction.component';
+import { AuctionsMarketplaceComponent } from './components/auctions-marketplace/auctions-marketplace.component';
+import { AuctionDetailComponent } from './components/auction-detail/auction-detail.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { EditAuctionComponent } from './components/edit-auction/edit-auction.com
     MyAuctionsComponent,
     AddAuctionComponent,
     EditAuctionComponent,
+    AuctionsMarketplaceComponent,
+    AuctionDetailComponent,
   ],
   imports: [
     BrowserModule,

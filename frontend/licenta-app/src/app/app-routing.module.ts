@@ -17,6 +17,7 @@ import {EditProductComponent} from "./components/edit-product/edit-product.compo
 import {AddAuctionComponent} from "./components/add-auction/add-auction.component";
 import {MyAuctionsComponent} from "./components/my-auctions/my-auctions.component";
 import {EditAuctionComponent} from "./components/edit-auction/edit-auction.component";
+import {AuctionsMarketplaceComponent} from "./components/auctions-marketplace/auctions-marketplace.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'my-auctions', component: MyAuctionsComponent },
   { path: 'add-auction', component: AddAuctionComponent },
   { path: 'edit-auction/:id', component: EditAuctionComponent },
+  { path: 'auctionplace', component: AuctionsMarketplaceComponent },
 
 
 ];

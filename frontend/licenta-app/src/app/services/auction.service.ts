@@ -35,4 +35,7 @@ export class AuctionService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getAllAuctions() {
+
+  }
 }
