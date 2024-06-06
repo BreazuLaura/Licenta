@@ -1,0 +1,12 @@
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group-prepend .input-group-text {
+  border-right: 0;
+}
+
+.input-group .form-control {
+  border-left: 0;
+}
