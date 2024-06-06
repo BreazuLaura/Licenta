@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.model.enums.AuctionStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Id;
 
@@ -40,6 +41,9 @@ public class Auction {
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = true)
     private Users owner;
+
+    @Enumerated(EnumType.STRING)
+    private AuctionStatus status = AuctionStatus.STARTED;
 
     // Getters and Setters
     public Long getId() {
@@ -106,6 +110,14 @@ public class Auction {
         this.owner = owner;
     }
 
+    public AuctionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AuctionStatus status) {
+        this.status = status;
+    }
+
     public Auction(Product product, BigDecimal startPrice, LocalDateTime endDate, Date startDate, Bid currentHighestBid, List<Bid> bids) {
         this.product = product;
         this.startPrice = startPrice;
@@ -116,6 +128,17 @@ public class Auction {
     }
 
     public Auction() {
+    }
+
+    public Auction(Product product, BigDecimal startPrice, LocalDateTime endDate, Date startDate, Bid currentHighestBid, List<Bid> bids, Users owner, AuctionStatus status) {
+        this.product = product;
+        this.startPrice = startPrice;
+        this.endDate = endDate;
+        this.startDate = startDate;
+        this.currentHighestBid = currentHighestBid;
+        this.bids = bids;
+        this.owner = owner;
+        this.status = status;
     }
 }
 
