@@ -23,7 +23,7 @@ export class ProductFormComponent {
   categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER'];
   statuses = ['AVAILABLE', 'SOLD'];
   saleTypes = ['MARKETPLACE', 'AUCTIONPLACE'];
-  dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_19', 'CAMIN_20', 'CAMIN_22']; // Add dorms enum
+  dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_P16', 'CAMIN_P20', 'CAMIN_P22']; // Add dorms enum
   selectedFile: File | null = null;
 
 

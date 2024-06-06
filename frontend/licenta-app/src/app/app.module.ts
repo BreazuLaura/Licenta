@@ -31,6 +31,7 @@ import { AuctionsMarketplaceComponent } from './components/auctions-marketplace/
 import { AuctionDetailComponent } from './components/auction-detail/auction-detail.component';
 import { BidPopupComponent } from './components/bid-popup/bid-popup.component';
 import {MatInputModule} from "@angular/material/input";
+import { DormMapComponent } from './components/dorm-map/dorm-map.component';
 
 
 
@@ -58,6 +59,7 @@ import {MatInputModule} from "@angular/material/input";
     AuctionsMarketplaceComponent,
     AuctionDetailComponent,
     BidPopupComponent,
+    DormMapComponent,
   ],
   imports: [
     BrowserModule,

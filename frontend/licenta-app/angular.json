@@ -26,9 +26,17 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "leaflet",
+              "leaflet.awesome-markers"
+            ]
           },
           "configurations": {
             "production": {

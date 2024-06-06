@@ -17,7 +17,7 @@ export class EditProductComponent implements OnInit {
   product: Product | undefined;
   imageSrc?: SafeUrl; // Now optional to handle initialization
   categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER'];
-  dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_19', 'CAMIN_20', 'CAMIN_22'];
+  dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_P16', 'CAMIN_P20', 'CAMIN_P22'];
 
 
   constructor(

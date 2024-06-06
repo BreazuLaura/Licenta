@@ -11,9 +11,9 @@ export enum Dorm {
   CAMIN_P3 = 'CAMIN_P3',
   CAMIN_P5 = 'CAMIN_P5',
   CAMIN_P6 = 'CAMIN_P6',
-  CAMIN_19 = 'CAMIN_19',
-  CAMIN_20 = 'CAMIN_20',
-  CAMIN_22 = 'CAMIN_22',
+  CAMIN_P16 = 'CAMIN_P16',
+  CAMIN_P20 = 'CAMIN_P20',
+  CAMIN_P22 = 'CAMIN_P22',
 }
 
 export enum SaleType {
