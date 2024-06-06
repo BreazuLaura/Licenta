@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.AuctionDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.model.Auction;
+import com.example.demo.model.Bid;
 import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
 import com.example.demo.model.enums.SaleType;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.ValidationException;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class AuctionController {
         Auction auction = new Auction();
         auction.setProduct(product);
         auction.setStartPrice(auctionDTO.getStartPrice());
-        auction.setEndDate(auctionDTO.getEndDate());
+        auction.setEndDate(auctionDTO.getEndDate().plusHours(3));
         auction.setStartDate(new Date());
         auction.setOwner(userRepository.findById(userId).orElse(null));
 
@@ -61,6 +63,11 @@ public class AuctionController {
     @GetMapping
     public List<Auction> getAllAuctions() {
         return auctionService.getAllAuctions();
+    }
+
+    @GetMapping("/auctionplace")
+    public List<Auction> getStartedAuctions() {
+        return auctionService.getStartedAuctions();
     }
 
     @GetMapping("/my-auctions/{userId}")
@@ -73,5 +80,10 @@ public class AuctionController {
     public ResponseEntity<Auction> getAuctionById(@PathVariable Long id) {
         Auction auction = auctionService.getAuctionById(id);
         return ResponseEntity.ok(auction);
+    }
+
+    @PutMapping("/stop/{id}")
+    public ResponseEntity<Auction> stopAuction(@PathVariable Long id) throws ValidationException {
+        return ResponseEntity.ok(auctionService.stopAuction(id));
     }
 }

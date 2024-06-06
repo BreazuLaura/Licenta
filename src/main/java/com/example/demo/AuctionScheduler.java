@@ -25,6 +25,7 @@ public class AuctionScheduler {
         List<Auction> auctions = auctionRepository.findAllByStatus(AuctionStatus.STARTED);
         LocalDateTime now = LocalDateTime.now();
         for (Auction auction : auctions) {
+            System.out.println(auction.getEndDate());
             if (auction.getEndDate().isBefore(now)) {
                 auction.setStatus(AuctionStatus.FINISHED);
                 auctionRepository.save(auction);

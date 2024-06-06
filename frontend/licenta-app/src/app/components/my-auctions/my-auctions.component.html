@@ -35,6 +35,7 @@
                 <h5 class="card-title">{{ auction.product.name }}</h5>
                 <p class="card-text"><strong>Starting Price:</strong> {{ auction.startPrice }} RON</p>
                 <p class="card-text"><strong>End Time:</strong> {{ auction.endDate | date:'medium' }}</p>
+                <p class="card-text"><strong>Status:</strong> {{ auction.status}}</p>
                 <div class="d-flex justify-content-between align-items-center mt-auto">
                   <div>
                     <button class="btn btn-info" (click)="editAuction(auction)">Edit Auction</button>
@@ -54,6 +55,3 @@
     </div>
   </div>
 </section>
-
-
-

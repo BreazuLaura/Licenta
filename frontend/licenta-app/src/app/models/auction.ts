@@ -11,4 +11,5 @@ export interface Auction {
   currentHighestBid?: Bid;
   bids? : Bid[];
   endTime? : string;
+  status? : string;
 }

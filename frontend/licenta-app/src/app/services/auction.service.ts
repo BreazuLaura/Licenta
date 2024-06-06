@@ -16,7 +16,7 @@ export class AuctionService {
   }
 
   getAuctions(): Observable<Auction[]> {
-    return this.http.get<Auction[]>(this.apiUrl);
+    return this.http.get<Auction[]>(`${this.apiUrl}/auctionplace`);
   }
 
   getUserAuctions(userId: number): Observable<Auction[]> {
@@ -33,6 +33,10 @@ export class AuctionService {
 
   deleteAuction(id: number | undefined): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  stopAuction(id: number): Observable<Auction> {
+    return this.http.put<Auction>(`${this.apiUrl}/stop/${id}`, {});
   }
 
   getAllAuctions() {

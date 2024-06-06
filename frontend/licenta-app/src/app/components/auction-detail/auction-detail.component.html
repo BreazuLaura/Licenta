@@ -34,7 +34,7 @@
           <div class="auction-details">
             <h4><span class="label">Description:</span> {{ auction.product?.description }}</h4>
             <h4><span class="label">Starting Price:</span> {{ auction.startPrice }} RON</h4>
-            <h4><span class="label">End Date:</span> {{ auction.endDate | date:'mediumDate' }}</h4>
+            <h4><span class="label">End Date:</span> {{ auction.endDate | date:'medium' }}</h4>
             <div class="bg-gray py-2 px-3 mt-4">
               <h2 class="mb-0">
                 Highest Bid: {{ auction.currentHighestBid ? auction.currentHighestBid.amount + ' RON' : 'No bid yet' }}

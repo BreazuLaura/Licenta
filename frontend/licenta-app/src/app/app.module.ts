@@ -34,6 +34,8 @@ import {MatInputModule} from "@angular/material/input";
 import { DormMapComponent } from './components/dorm-map/dorm-map.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
+import { StopAuctionModalComponent } from './components/stop-auction-modal/stop-auction-modal.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -63,6 +65,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AuctionDetailComponent,
     BidPopupComponent,
     DormMapComponent,
+    StopAuctionModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSnackBarModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
