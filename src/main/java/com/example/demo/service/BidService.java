@@ -53,7 +53,13 @@ public class BidService {
         bid.setUser(user);
         bid.setAmount(bidDTO.getAmount());
         bid.setBidTime(new Date());
+        bid = bidRepository.save(bid);
 
-        return bidRepository.save(bid);
+        if(auction.getCurrentHighestBid() == null  || (bidDTO.getAmount().compareTo(auction.getCurrentHighestBid().getAmount()) == 1)) {
+            auction.setCurrentHighestBid(bid);
+            auctionService.saveAuction(auction);
+        }
+
+        return bid;
     }
 }
