@@ -30,7 +30,7 @@
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/jquery-ui-dist/jquery-ui.css",
+              "node_modules/jquery-ui-dist/jquery-ui.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
