@@ -1,21 +1,18 @@
-.container {
-  padding: 20px;
+/* CSS for the draggable events and the calendar */
+#external-events .fc-event {
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 #external-events {
+  margin-bottom: 15px;
   padding: 10px;
-  width: 150px;
-  height: 300px;
-  overflow: auto;
-  background: #f4f4f4;
-  border: 1px solid #ddd;
+  background: #eee;
+  border: 1px solid #ccc;
+  overflow-y: auto;
 }
 
-.external-event {
-  margin: 10px 0;
-  padding: 5px;
-  background: #3c8dbc;
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
+#drop-remove {
+  margin-top: 10px;
 }
