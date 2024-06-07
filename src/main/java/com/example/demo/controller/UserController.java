@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDTO;
 import com.example.demo.model.Users;
+import com.example.demo.service.EmailService;
 import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     @PostMapping("/register")
     public ResponseEntity<Users> registerUser(@Valid @RequestBody UserDTO user) {
