@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
+import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import * as $ from 'jquery';
-import 'jquery-ui-dist/jquery-ui';  // Ensure jQuery UI is imported
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction'; // Note: Import Draggable from here
+import listPlugin from '@fullcalendar/list';
 
 @Component({
   selector: 'app-my-services',
@@ -14,12 +13,17 @@ import 'jquery-ui-dist/jquery-ui';  // Ensure jQuery UI is imported
 export class MyServicesComponent implements OnInit {
 
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     initialView: 'dayGridMonth',
     editable: true,
     droppable: true,
-    events: [], // Define events here
-    eventReceive: this.handleEventReceive.bind(this) // Bind the function to the component context
+    events: [] as EventInput[],
+    eventReceive: this.handleEventReceive.bind(this)
   };
 
   constructor() { }
@@ -30,44 +34,49 @@ export class MyServicesComponent implements OnInit {
   }
 
   loadEvents(): void {
-    // Load events from your backend or define static events
-    this.calendarOptions.events = [
-      { title: 'Event 1', date: '2024-06-10', color: 'green' },
-      { title: 'Event 2', date: '2024-06-15', color: 'blue' }
-    ];
+    // ... (Your event loading logic) ...
   }
 
   initializeDraggableEvents(): void {
-    setTimeout(() => {
-      ($('#external-events .fc-event') as any).each((index: any, element: any) => {
-        const eventObject = {
-          title: $.trim($(element).text()) // Use arrow function for correct `this` context
-        };
-        $(element).data('eventObject', eventObject);
-        // @ts-ignore
-        $(element).draggable({
-          zIndex: 999,
-          revert: true,
-          revertDuration: 0
+    document.addEventListener('DOMContentLoaded', () => {
+      const draggableEl = document.getElementById('external-events-list');
+      if (draggableEl) {
+        new Draggable(draggableEl, { // No namespace, Draggable is a class
+          itemSelector: '.fc-event',
+          eventData: (eventEl: HTMLElement) => ({ // Explicitly typed
+            title: eventEl.innerText,
+          })
         });
-      });
-    }, 1000);
+      }
+    });
   }
 
   handleEventReceive(eventInfo: any): void {
-    console.log('Event received', eventInfo);
+    // ... (Your event handling logic) ...
   }
 
   addNewEvent(): void {
     const eventTitle = (document.getElementById('new-event') as HTMLInputElement).value;
     if (eventTitle) {
-      const newEvent = {
+      const newEvent: EventInput = {
         title: eventTitle,
-        date: new Date().toISOString().split('T')[0], // Example date, replace with a date picker value
-        color: 'yellow'
+        start: new Date().toISOString().split('T')[0],
+        allDay: true,
+        color: this.getRandomColor()
       };
+
+      const currentEvents = this.calendarOptions.events || [];
       // @ts-ignore
-      this.calendarOptions.events = [...(this.calendarOptions.events || []), newEvent];
+      this.calendarOptions.events = [...currentEvents, newEvent];
     }
+  }
+
+  private getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 }
