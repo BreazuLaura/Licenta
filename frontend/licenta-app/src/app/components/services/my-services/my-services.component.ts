@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';  // Add AfterViewInit
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { FullCalendarComponent } from '@fullcalendar/angular'; // Import FullCalendarComponent from @fullcalendar/angular
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin, { Draggable } from '@fullcalendar/interaction'; // Note: Import Draggable from here
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+
 
 @Component({
   selector: 'app-my-services',
@@ -11,6 +13,8 @@ import listPlugin from '@fullcalendar/list';
   styleUrls: ['./my-services.component.css']
 })
 export class MyServicesComponent implements OnInit {
+
+  @ViewChild('calendar') calendarComponent!: FullCalendarComponent; // Get reference to calendar
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
@@ -38,21 +42,26 @@ export class MyServicesComponent implements OnInit {
   }
 
   initializeDraggableEvents(): void {
-    document.addEventListener('DOMContentLoaded', () => {
-      const draggableEl = document.getElementById('external-events-list');
-      if (draggableEl) {
-        new Draggable(draggableEl, { // No namespace, Draggable is a class
-          itemSelector: '.fc-event',
-          eventData: (eventEl: HTMLElement) => ({ // Explicitly typed
+    const externalEventsContainerEl = document.getElementById('external-events-list');
+    if (externalEventsContainerEl) {
+      new Draggable(externalEventsContainerEl, {
+        itemSelector: '.fc-event',
+        eventData: (eventEl: HTMLElement) => {
+          return {
             title: eventEl.innerText,
-          })
-        });
-      }
-    });
+            duration: { days: 1 }, // Set default duration to one day
+            allDay: true           // Make events all-day
+          };
+        }
+      });
+    }
   }
 
-  handleEventReceive(eventInfo: any): void {
-    // ... (Your event handling logic) ...
+  handleEventReceive(eventInfo: any) {
+    // Access the FullCalendar API directly if needed
+    const calendarApi = this.calendarComponent.getApi();
+    // Add event to calendar directly
+    calendarApi.addEvent(eventInfo.event);
   }
 
   addNewEvent(): void {
