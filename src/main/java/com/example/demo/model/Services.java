@@ -2,14 +2,13 @@ package com.example.demo.model;
 
 import com.example.demo.model.enums.Dorm;
 import com.example.demo.model.enums.ServiceCategory;
-import com.example.demo.model.enums.ServiceStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-public class Service {
+public class Services {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,7 @@ public class Service {
     @JoinColumn(name = "owner_id", nullable = false)
     private Users owner;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "services")
     private List<Appointment> appointments;
 
     // Getters and Setters
@@ -118,7 +117,7 @@ public class Service {
         this.appointments = appointments;
     }
 
-    public Service(Long id, String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
+    public Services(Long id, String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -128,7 +127,7 @@ public class Service {
         this.owner = owner;
     }
 
-    public Service(String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
+    public Services(String name, String description, BigDecimal price, ServiceCategory category, Dorm dorm, Users owner) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -137,7 +136,7 @@ public class Service {
         this.owner = owner;
     }
 
-    public Service() {
+    public Services() {
     }
 }
 

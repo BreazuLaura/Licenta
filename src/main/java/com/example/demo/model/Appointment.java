@@ -16,15 +16,15 @@ public class Appointment {
     private LocalDateTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    @JoinColumn(name = "services_id", nullable = false)
+    private Services services;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Users owner;
 
     @ManyToOne
-    @JoinColumn(name = "buyer_id", nullable = false)
+    @JoinColumn(name = "buyer_id")
     private Users buyer;
 
     @Enumerated(EnumType.STRING)
@@ -54,12 +54,12 @@ public class Appointment {
         this.endTime = endTime;
     }
 
-    public Service getService() {
-        return service;
+    public Services getService() {
+        return services;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setService(Services services) {
+        this.services = services;
     }
 
     public Users getOwner() {
@@ -86,10 +86,10 @@ public class Appointment {
         this.status = status;
     }
 
-    public Appointment(LocalDateTime startTime, LocalDateTime endTime, Service service, Users owner, Users buyer, AppointmentStatus status) {
+    public Appointment(LocalDateTime startTime, LocalDateTime endTime, Services services, Users owner, Users buyer, AppointmentStatus status) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.service = service;
+        this.services = services;
         this.owner = owner;
         this.buyer = buyer;
         this.status = status;

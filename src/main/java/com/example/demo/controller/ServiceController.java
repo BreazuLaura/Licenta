@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ServiceDTO;
-import com.example.demo.model.Service;
+import com.example.demo.model.Services;
 import com.example.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,30 +18,30 @@ public class ServiceController {
     private ServiceService serviceService;
 
     @GetMapping
-    public List<Service> getAllServices() {
+    public List<Services> getAllServices() {
         return serviceService.getAllServices();
     }
 
     @GetMapping("/{id}")
-    public Service getServiceById(@PathVariable Long id) {
+    public Services getServiceById(@PathVariable Long id) {
         return serviceService.getServiceById(id);
     }
 
 
     @GetMapping("/user/{userId}")
-    public List<Service> getServiceByUserId(@PathVariable Long userId) {
+    public List<Services> getServiceByUserId(@PathVariable Long userId) {
         return serviceService.getServiceByUserId(userId);
     }
 
 
     @PostMapping("/{id}")
-    public Service createService(@RequestBody ServiceDTO serviceDTO, @PathVariable Long id) {
+    public Services createService(@RequestBody ServiceDTO serviceDTO, @PathVariable Long id) {
         return serviceService.createService(serviceDTO, id);
     }
 
     @PutMapping("/{id}")
-    public Service updateService(@PathVariable Long id, @RequestBody Service service) {
-        return serviceService.updateService(id, service);
+    public Services updateService(@PathVariable Long id, @RequestBody Services services) {
+        return serviceService.updateService(id, services);
     }
 
     @DeleteMapping("/{id}")

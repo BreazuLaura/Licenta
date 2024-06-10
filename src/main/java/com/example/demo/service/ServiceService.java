@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ServiceDTO;
-import com.example.demo.model.Service;
-import com.example.demo.model.Users;
+import com.example.demo.model.Services;
 import com.example.demo.repository.ServiceRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +18,36 @@ public class ServiceService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Service> getAllServices() {
+    public List<Services> getAllServices() {
         return serviceRepository.findAll();
     }
 
-    public Service getServiceById(Long id) {
+    public Services getServiceById(Long id) {
         return serviceRepository.findById(id).orElse(null);
     }
 
-    public Service createService(ServiceDTO serviceDTO, Long userId) {
-        Service service = new Service();
-        service.setDescription(serviceDTO.getDescription());
-        service.setCategory(serviceDTO.getCategory());
-        service.setDorm(serviceDTO.getDorm());
-        service.setName(serviceDTO.getName());
-        service.setPrice(serviceDTO.getPrice());
-        service.setOwner(userRepository.findById(userId).orElse(null));
-        service.setDuration(serviceDTO.getDuration());
-        return serviceRepository.save(service);
+    public Services createService(ServiceDTO serviceDTO, Long userId) {
+        Services services = new Services();
+        services.setDescription(serviceDTO.getDescription());
+        services.setCategory(serviceDTO.getCategory());
+        services.setDorm(serviceDTO.getDorm());
+        services.setName(serviceDTO.getName());
+        services.setPrice(serviceDTO.getPrice());
+        services.setOwner(userRepository.findById(userId).orElse(null));
+        services.setDuration(serviceDTO.getDuration());
+        return serviceRepository.save(services);
     }
 
-    public Service updateService(Long id, Service service) {
-        service.setId(id);
-        return serviceRepository.save(service);
+    public Services updateService(Long id, Services services) {
+        services.setId(id);
+        return serviceRepository.save(services);
     }
 
     public void deleteService(Long id) {
         serviceRepository.deleteById(id);
     }
 
-    public List<Service> getServiceByUserId(Long userId) {
+    public List<Services> getServiceByUserId(Long userId) {
         return serviceRepository.findByOwnerId(userId);
     }
 }

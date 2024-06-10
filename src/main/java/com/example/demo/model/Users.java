@@ -27,7 +27,7 @@ public class Users {
 
     @OneToMany(mappedBy = "owner")
     @JsonIgnore
-    private List<Service> services;
+    private List<Services> services;
 
     @OneToMany(mappedBy = "owner")
     private List<Appointment> ownedAppointments;
@@ -102,11 +102,11 @@ public class Users {
         this.dorm = dorm;
     }
 
-    public List<Service> getServices() {
+    public List<Services> getServices() {
         return services;
     }
 
-    public void setServices(List<Service> services) {
+    public void setServices(List<Services> services) {
         this.services = services;
     }
 

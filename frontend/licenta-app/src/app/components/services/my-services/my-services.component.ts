@@ -7,8 +7,9 @@ import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import {Router} from "@angular/router";
 import {ServiceService} from "../../../services/service.service";
-import {Auction} from "../../../models/auction";
 import {Service} from "../../../models/service";
+import { AppointmentService, Appointment } from 'src/app/services/appointment.service';
+
 
 
 @Component({
@@ -51,22 +52,24 @@ export class MyServicesComponent implements OnInit {
       droppable: true,
       events: [],
       drop: this.handleEventDrop.bind(this),
-      eventReceive: (info) => {
-        // Adjust the event end time to reflect the correct service duration
-        const event = info.event;
-        const draggedServiceName = event.title.trim();
-        const service = this.services.find(s => s.name === draggedServiceName);
+      // eventReceive: (info) => {
+      //   // Adjust the event end time to reflect the correct service duration
+      //   const event = info.event;
+      //   const draggedServiceName = event.title.trim();
+      //   const service = this.services.find(s => s.name === draggedServiceName);
+      //
+      //   if (service) {
+      //     event.setEnd(new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000));
+      //   }
+      // }
+      eventReceive: this.handleEventReceive.bind(this)
 
-        if (service) {
-          event.setEnd(new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000));
-        }
-      }
     };
   }
 
 
 
-  constructor(private router: Router, private serviceService: ServiceService) {
+  constructor(private router: Router, private serviceService: ServiceService, private appointmentService: AppointmentService) {
     const userIdStr = localStorage.getItem('userId');
     this.userId = userIdStr ? parseInt(userIdStr, 10) : 0;
   }
@@ -107,7 +110,9 @@ export class MyServicesComponent implements OnInit {
             duration: { hours: Math.floor(service.duration), minutes: (service.duration % 1) * 60 },
             backgroundColor: this.serviceColors[service.id!],
             borderColor: this.serviceColors[service.id!],
-            textColor: '#fff'
+            textColor: '#fff',
+            serviceId: service.id,
+            ownerId: Number(localStorage.getItem('userId'))
           };
         }
         return {};
@@ -131,6 +136,19 @@ export class MyServicesComponent implements OnInit {
       };
       // @ts-ignore
       this.calendarOptions.events = [...(this.calendarOptions.events || []), event];
+
+      const appointment: Appointment = {
+        startTime: info.date.toISOString(),
+        endTime: new Date(info.date.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
+        serviceId: service.id!,
+        ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
+        buyerId: Number(localStorage.getItem('userId')) // For now, set the buyer as the logged-in user; update logic as needed
+      };
+
+      this.appointmentService.createAppointment(appointment).subscribe(
+        response => console.log('Appointment saved', response),
+        error => console.error('Error saving appointment', error)
+      );
     }
 
     const removeCheckbox = document.getElementById('drop-remove') as HTMLInputElement;
@@ -165,11 +183,28 @@ export class MyServicesComponent implements OnInit {
     }
   }
 
-  handleEventReceive(eventInfo: any) {
-    // Access the FullCalendar API directly if needed
-    const calendarApi = this.calendarComponent.getApi();
-    // Add event to calendar directly
-    calendarApi.addEvent(eventInfo.event);
+  handleEventReceive(info: any): void {
+    const event = info.event;
+    const draggedServiceName = event.title.trim();
+    const service = this.services.find(s => s.name === draggedServiceName);
+
+    if (service) {
+      event.setEnd(new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000));
+
+      // Save the appointment to the database
+      const appointment: Appointment = {
+        startTime: event.start!.toISOString(),
+        endTime: new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
+        serviceId: service.id!,
+        ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
+        buyerId: Number(localStorage.getItem('userId')) // For now, set the buyer as the logged-in user; update logic as needed
+      };
+
+      this.appointmentService.createAppointment(appointment).subscribe(
+        response => console.log('Appointment saved', response),
+        error => console.error('Error saving appointment', error)
+      );
+    }
   }
 
 
