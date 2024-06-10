@@ -31,11 +31,38 @@ export class MyServicesComponent implements OnInit {
     editable: true,
     droppable: true,
     events: [] as EventInput[],
-    eventReceive: this.handleEventReceive.bind(this)
+    // eventReceive: this.handleEventReceive.bind(this),
+    drop: this.handleEventDrop.bind(this)
+
   };
   userId: number;
   services: Service[] = [];
   serviceColors: { [id: number]: string } = {};
+
+  initCalendar(): void {
+    this.calendarOptions = {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      themeSystem: 'bootstrap',
+      editable: true,
+      droppable: true,
+      events: [],
+      drop: this.handleEventDrop.bind(this),
+      eventReceive: (info) => {
+        // Adjust the event end time to reflect the correct service duration
+        const event = info.event;
+        const draggedServiceName = event.title.trim();
+        const service = this.services.find(s => s.name === draggedServiceName);
+
+        if (service) {
+          event.setEnd(new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000));
+        }
+      }
+    };
+  }
 
 
 
@@ -47,6 +74,10 @@ export class MyServicesComponent implements OnInit {
   ngOnInit(): void {
     this.loadServices();
     this.initializeDraggableEvents();
+    this.initDraggableEvents();
+    this.initCalendar();
+
+
   }
 
   loadServices(): void {
@@ -61,17 +92,74 @@ export class MyServicesComponent implements OnInit {
     );
   }
 
+  initDraggableEvents(): void {
+    const containerEl = document.getElementById('external-events')!;
+
+    new Draggable(containerEl, {
+      itemSelector: '.draggable-event',
+      eventData: (eventEl: HTMLElement) => {
+        const draggedServiceName = eventEl.innerText.trim();
+        const service = this.services.find(s => s.name === draggedServiceName);
+
+        if (service) {
+          return {
+            title: service.name,
+            duration: { hours: Math.floor(service.duration), minutes: (service.duration % 1) * 60 },
+            backgroundColor: this.serviceColors[service.id!],
+            borderColor: this.serviceColors[service.id!],
+            textColor: '#fff'
+          };
+        }
+        return {};
+      }
+    });
+  }
+
+
+  handleEventDrop(info: any): void {
+    const draggedServiceName = info.draggedEl.innerText.trim();
+    const service = this.services.find(s => s.name === draggedServiceName);
+
+    if (service) {
+      const event = {
+        title: service.name,
+        start: info.date,
+        end: new Date(info.date.getTime() + service.duration * 60 * 60 * 1000), // Set duration directly
+        backgroundColor: window.getComputedStyle(info.draggedEl, null).getPropertyValue('background-color'),
+        borderColor: window.getComputedStyle(info.draggedEl, null).getPropertyValue('background-color'),
+        textColor: window.getComputedStyle(info.draggedEl, null).getPropertyValue('color')
+      };
+      // @ts-ignore
+      this.calendarOptions.events = [...(this.calendarOptions.events || []), event];
+    }
+
+    const removeCheckbox = document.getElementById('drop-remove') as HTMLInputElement;
+    if (removeCheckbox && removeCheckbox.checked) {
+      info.draggedEl.parentNode!.removeChild(info.draggedEl);
+    }
+  }
+
+
+
   initializeDraggableEvents(): void {
     const externalEventsContainerEl = document.getElementById('external-events-list');
     if (externalEventsContainerEl) {
       new Draggable(externalEventsContainerEl, {
         itemSelector: '.fc-event',
         eventData: (eventEl: HTMLElement) => {
-          return {
-            title: eventEl.innerText,
-            duration: { hours: 1 },
-            allDay: false,
-          };
+          const draggedServiceName = eventEl.innerText.trim();
+          const service = this.services.find(s => s.name === draggedServiceName);
+
+          if (service) {
+            return {
+              title: service.name,
+              duration: { hours: Math.floor(service.duration), minutes: (service.duration % 1) * 60 },
+              backgroundColor: this.serviceColors[service.id!],
+              borderColor: this.serviceColors[service.id!],
+              textColor: '#fff'
+            };
+          }
+          return {};
         }
       });
     }
