@@ -26,6 +26,7 @@ public class Users {
     private Dorm dorm;
 
     @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Service> services;
 
     @OneToMany(mappedBy = "owner")

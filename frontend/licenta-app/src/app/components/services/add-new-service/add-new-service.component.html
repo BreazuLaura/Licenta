@@ -1,55 +1,38 @@
-<!--&lt;!&ndash; add-new-service.ts.component.html &ndash;&gt;-->
+  <h1>Add New Service</h1>
+  <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" [(ngModel)]="service.name" class="form-control" required>
+    </div>
 
-<!--<section class="content-header">-->
-<!--  <div class="container-fluid">-->
-<!--    <div class="row mb-2">-->
-<!--      <div class="col-sm-6">-->
-<!--        <h1>Add New Service</h1>-->
-<!--      </div>-->
-<!--      <div class="col-sm-6">-->
-<!--        <ol class="breadcrumb float-sm-right">-->
-<!--          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>-->
-<!--          <li class="breadcrumb-item active">Add New Service</li>-->
-<!--        </ol>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" [(ngModel)]="service.description" class="form-control" required></textarea>
+    </div>
 
-<!--<section class="content">-->
-<!--  <div class="card card-primary">-->
-<!--    <div class="card-body">-->
-<!--      <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">-->
-<!--        <div class="form-group">-->
-<!--          <label for="name">Service Name</label>-->
-<!--          <input type="text" id="name" name="name" [(ngModel)]="service.name" class="form-control" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="description">Description</label>-->
-<!--          <textarea id="description" name="description" [(ngModel)]="service.description" class="form-control" required></textarea>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="price">Price</label>-->
-<!--          <input type="number" id="price" name="price" [(ngModel)]="service.price" class="form-control" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="duration">Duration (hours)</label>-->
-<!--          <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" class="form-control" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="category">Category</label>-->
-<!--          <select id="category" name="category" [(ngModel)]="service.category" class="form-control" required>-->
-<!--            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="dorm">Dorm</label>-->
-<!--          <select id="dorm" name="dorm" [(ngModel)]="service.dorm" class="form-control" required>-->
-<!--            <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary btn-block">Save Service</button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" [(ngModel)]="service.price" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration (hours)</label>
+      <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" name="category" [(ngModel)]="service.category" class="form-control" required>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dorm">Dorm</label>
+      <select id="dorm" name="dorm" [(ngModel)]="service.dorm" class="form-control" required>
+        <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Save Service</button>
+  </form>

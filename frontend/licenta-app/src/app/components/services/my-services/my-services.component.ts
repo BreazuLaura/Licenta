@@ -5,6 +5,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import {Router} from "@angular/router";
+import {ServiceService} from "../../../services/service.service";
+import {Auction} from "../../../models/auction";
+import {Service} from "../../../models/service";
 
 
 @Component({
@@ -29,16 +33,32 @@ export class MyServicesComponent implements OnInit {
     events: [] as EventInput[],
     eventReceive: this.handleEventReceive.bind(this)
   };
+  userId: number;
+  services: Service[] = [];
+  serviceColors: { [id: number]: string } = {};
 
-  constructor() { }
+
+
+  constructor(private router: Router, private serviceService: ServiceService) {
+    const userIdStr = localStorage.getItem('userId');
+    this.userId = userIdStr ? parseInt(userIdStr, 10) : 0;
+  }
 
   ngOnInit(): void {
-    this.loadEvents();
+    this.loadServices();
     this.initializeDraggableEvents();
   }
 
-  loadEvents(): void {
-    // ... (Your event loading logic) ...
+  loadServices(): void {
+    this.serviceService.getServicesByUserId(this.userId).subscribe(
+      (services: Service[]) => {
+        this.services = services;
+        this.assignRandomColors();
+      },
+      error => {
+        console.error('Error fetching services:', error);
+      }
+    );
   }
 
   initializeDraggableEvents(): void {
@@ -49,8 +69,8 @@ export class MyServicesComponent implements OnInit {
         eventData: (eventEl: HTMLElement) => {
           return {
             title: eventEl.innerText,
-            duration: { days: 1 }, // Set default duration to one day
-            allDay: true           // Make events all-day
+            duration: { hours: 1 },
+            allDay: false,
           };
         }
       });
@@ -64,28 +84,30 @@ export class MyServicesComponent implements OnInit {
     calendarApi.addEvent(eventInfo.event);
   }
 
-  addNewEvent(): void {
-    const eventTitle = (document.getElementById('new-event') as HTMLInputElement).value;
-    if (eventTitle) {
-      const newEvent: EventInput = {
-        title: eventTitle,
-        start: new Date().toISOString().split('T')[0],
-        allDay: true,
-        color: this.getRandomColor()
-      };
 
-      const currentEvents = this.calendarOptions.events || [];
-      // @ts-ignore
-      this.calendarOptions.events = [...currentEvents, newEvent];
-    }
+  assignRandomColors(): void {
+    this.services.forEach(service => {
+      if (service.id !== undefined) {
+        this.serviceColors[service.id] = this.getRandomColor();
+      }
+    });
   }
 
-  private getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+
+  getRandomColor(): string {
+    const colorPalette: string[] = [
+      'bg-success',
+      'bg-warning',
+      'bg-info',
+      'bg-danger',
+      'bg-primary'
+    ];
+
+    const randomIndex = Math.floor(Math.random() * colorPalette.length);
+    return colorPalette[randomIndex];
+  }
+
+  navigateToAddService(): void {
+    this.router.navigate(['/add-new-service']);
   }
 }

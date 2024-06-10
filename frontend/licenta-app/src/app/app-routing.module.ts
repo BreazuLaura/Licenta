@@ -21,6 +21,7 @@ import {AuctionsMarketplaceComponent} from "./components/auctions/auctions-marke
 import {AuctionDetailComponent} from "./components/auctions/auction-detail/auction-detail.component";
 import {DormMapComponent} from "./components/dorm-map/dorm-map.component";
 import {MyServicesComponent} from "./components/services/my-services/my-services.component";
+import {AddNewServiceComponent} from "./components/services/add-new-service/add-new-service.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'auction-details/:id', component: AuctionDetailComponent },
   { path: 'dorm-map', component: DormMapComponent },
   { path: 'my-services', component: MyServicesComponent },
+  { path: 'add-new-service', component: AddNewServiceComponent}
 
 
 

@@ -38,6 +38,7 @@ import { StopAuctionModalComponent } from './components/auctions/stop-auction-mo
 import {MatButtonModule} from "@angular/material/button";
 import { MyServicesComponent } from './components/services/my-services/my-services.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { AddNewServiceComponent} from './components/services/add-new-service/add-new-service.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -72,6 +73,7 @@ import interactionPlugin from '@fullcalendar/interaction';
     DormMapComponent,
     StopAuctionModalComponent,
     MyServicesComponent,
+    AddNewServiceComponent
   ],
   imports: [
     BrowserModule,
