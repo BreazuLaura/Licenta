@@ -41,10 +41,7 @@ public class AppointmentService {
         Appointment appointment = new Appointment();
         appointment.setStartTime(appointmentDTO.getStartTime().plusHours(3));
         appointment.setEndTime(appointmentDTO.getEndTime().plusHours(3));
-
-        Services service = serviceRepository.findById(appointmentDTO.getServiceId())
-                .orElseThrow(() -> new ResourceNotFoundException("Service not found"));
-        appointment.setService(service);
+        appointment.setService(appointmentDTO.getService());
 
         Users owner = userRepository.findById(appointmentDTO.getOwnerId())
                 .orElseThrow(() -> new ResourceNotFoundException("Owner not found"));
@@ -53,5 +50,9 @@ public class AppointmentService {
         appointment.setStatus(AppointmentStatus.AVAILABLE);
 
         return appointmentRepository.save(appointment);
+    }
+
+    public List<Appointment> getAppointmentByOwnerId(Long id) {
+        return appointmentRepository.findByOwnerId(id);
     }
 }

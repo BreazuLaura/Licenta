@@ -30,6 +30,7 @@ public class Users {
     private List<Services> services;
 
     @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Appointment> ownedAppointments;
 
     @OneToMany(mappedBy = "buyer")

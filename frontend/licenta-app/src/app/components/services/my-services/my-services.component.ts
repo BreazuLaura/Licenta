@@ -8,8 +8,8 @@ import listPlugin from '@fullcalendar/list';
 import {Router} from "@angular/router";
 import {ServiceService} from "../../../services/service.service";
 import {Service} from "../../../models/service";
-import { AppointmentService, Appointment } from 'src/app/services/appointment.service';
-
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { Appointment} from "../../../models/appointment";
 
 
 @Component({
@@ -39,6 +39,8 @@ export class MyServicesComponent implements OnInit {
   userId: number;
   services: Service[] = [];
   serviceColors: { [id: number]: string } = {};
+  appointments: Appointment[] = [];
+
 
   initCalendar(): void {
     this.calendarOptions = {
@@ -52,16 +54,6 @@ export class MyServicesComponent implements OnInit {
       droppable: true,
       events: [],
       drop: this.handleEventDrop.bind(this),
-      // eventReceive: (info) => {
-      //   // Adjust the event end time to reflect the correct service duration
-      //   const event = info.event;
-      //   const draggedServiceName = event.title.trim();
-      //   const service = this.services.find(s => s.name === draggedServiceName);
-      //
-      //   if (service) {
-      //     event.setEnd(new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000));
-      //   }
-      // }
       eventReceive: this.handleEventReceive.bind(this)
 
     };
@@ -75,12 +67,27 @@ export class MyServicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userId = Number(localStorage.getItem('userId'));
+
     this.loadServices();
+    this.loadAppointment();
     this.initializeDraggableEvents();
     this.initDraggableEvents();
     this.initCalendar();
 
+  }
 
+  loadAppointment(): void {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    this.appointmentService.getAppointmentsByOwnerId(this.userId).subscribe(
+      (appointments: Appointment[]) => {
+        this.appointments = appointments;
+        this.initializeCalendarEvents();
+      },
+      error => {
+        console.error('Error fetching services:', error);
+      }
+    );
   }
 
   loadServices(): void {
@@ -120,6 +127,20 @@ export class MyServicesComponent implements OnInit {
     });
   }
 
+  initializeCalendarEvents(): void {
+    this.calendarOptions.events = this.appointments.map(appointment => {
+      const serviceId = appointment.service?.id;
+      return {
+        title: appointment.service.name,
+        start: appointment.startTime,
+        end: appointment.endTime,
+        backgroundColor: serviceId ? this.serviceColors[serviceId] : '#000000', // Default to black if undefined
+        borderColor: serviceId ? this.serviceColors[serviceId] : '#000000'
+      };
+    });
+  }
+
+
 
   handleEventDrop(info: any): void {
     const draggedServiceName = info.draggedEl.innerText.trim();
@@ -138,11 +159,13 @@ export class MyServicesComponent implements OnInit {
       this.calendarOptions.events = [...(this.calendarOptions.events || []), event];
 
       const appointment: Appointment = {
+        id: 0,
         startTime: info.date.toISOString(),
         endTime: new Date(info.date.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
-        serviceId: service.id!,
+        service: service,
         ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
-        buyerId: Number(localStorage.getItem('userId')) // For now, set the buyer as the logged-in user; update logic as needed
+        buyerId: 0,
+        status: 'AVAILABLE'
       };
 
       this.appointmentService.createAppointment(appointment).subscribe(
@@ -193,11 +216,14 @@ export class MyServicesComponent implements OnInit {
 
       // Save the appointment to the database
       const appointment: Appointment = {
+        id: 0,
         startTime: event.start!.toISOString(),
         endTime: new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
-        serviceId: service.id!,
+        service: service,
         ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
-        buyerId: Number(localStorage.getItem('userId')) // For now, set the buyer as the logged-in user; update logic as needed
+        buyerId: Number(localStorage.getItem('userId')), // For now, set the buyer as the logged-in user; update logic as needed
+        status: 'AVAILABLE'
+
       };
 
       this.appointmentService.createAppointment(appointment).subscribe(

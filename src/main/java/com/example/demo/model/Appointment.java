@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.model.enums.AppointmentStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,10 +22,12 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
+    @JsonIgnore
     private Users owner;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
+    @JsonIgnore
     private Users buyer;
 
     @Enumerated(EnumType.STRING)

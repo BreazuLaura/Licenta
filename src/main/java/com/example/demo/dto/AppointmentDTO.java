@@ -1,11 +1,13 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Services;
+
 import java.time.LocalDateTime;
 
 public class AppointmentDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Long serviceId;
+    private Services service;
     private Long ownerId;
     private Long buyerId;
 
@@ -25,12 +27,12 @@ public class AppointmentDTO {
         this.endTime = endTime;
     }
 
-    public Long getServiceId() {
-        return serviceId;
+    public Services getService() {
+        return service;
     }
 
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+    public void setService(Services service) {
+        this.service = service;
     }
 
     public Long getOwnerId() {
@@ -49,10 +51,10 @@ public class AppointmentDTO {
         this.buyerId = buyerId;
     }
 
-    public AppointmentDTO(LocalDateTime startTime, LocalDateTime endTime, Long serviceId, Long ownerId, Long buyerId) {
+    public AppointmentDTO(LocalDateTime startTime, LocalDateTime endTime, Services service, Long ownerId, Long buyerId) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.serviceId = serviceId;
+        this.service = service;
         this.ownerId = ownerId;
         this.buyerId = buyerId;
     }

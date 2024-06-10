@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.example.demo.model.enums.Dorm;
 import com.example.demo.model.enums.ServiceCategory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -37,9 +38,11 @@ public class Services {
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
+    @JsonIgnore
     private Users owner;
 
     @OneToMany(mappedBy = "services")
+    @JsonIgnore
     private List<Appointment> appointments;
 
     // Getters and Setters
