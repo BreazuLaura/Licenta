@@ -30,4 +30,8 @@ export class AppointmentService {
   getAppointmentsByService(serviceId: number): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.apiUrl}/service/${serviceId}`);
   }
+
+  bookAppointment(appointmentId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/book`, { appointmentId });
+  }
 }

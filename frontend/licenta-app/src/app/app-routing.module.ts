@@ -24,6 +24,7 @@ import {MyServicesComponent} from "./components/services/my-services/my-services
 import {AddNewServiceComponent} from "./components/services/add-new-service/add-new-service.component";
 import {ServicesMarketplaceComponent} from "./components/services/services-marketplace/services-marketplace.component";
 import {BookServiceComponent} from "./components/services/book-service/book-service.component";
+import {MyCalendarComponent} from "./components/my-calendar/my-calendar.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -50,7 +51,9 @@ const routes: Routes = [
   { path: 'my-services', component: MyServicesComponent },
   { path: 'add-new-service', component: AddNewServiceComponent},
   { path: 'services-marketplace', component: ServicesMarketplaceComponent },
-  { path: 'book-service/:id', component: BookServiceComponent }
+  { path: 'book-service/:id', component: BookServiceComponent },
+  { path: 'my-calendar/:id', component: MyCalendarComponent}
+
 
 
 

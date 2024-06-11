@@ -44,6 +44,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ServicesMarketplaceComponent } from './components/services/services-marketplace/services-marketplace.component';
 import { BookServiceComponent } from './components/services/book-service/book-service.component';
+import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
+import { BookServicePopupComponent } from './components/services/book-service-popup/book-service-popup.component';
 
 
 
@@ -77,7 +79,9 @@ import { BookServiceComponent } from './components/services/book-service/book-se
     MyServicesComponent,
     AddNewServiceComponent,
     ServicesMarketplaceComponent,
-    BookServiceComponent
+    BookServiceComponent,
+    MyCalendarComponent,
+    BookServicePopupComponent
   ],
   imports: [
     BrowserModule,
