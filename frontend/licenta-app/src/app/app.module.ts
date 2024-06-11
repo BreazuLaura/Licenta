@@ -43,6 +43,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ServicesMarketplaceComponent } from './components/services/services-marketplace/services-marketplace.component';
+import { BookServiceComponent } from './components/services/book-service/book-service.component';
 
 
 
@@ -75,7 +76,8 @@ import { ServicesMarketplaceComponent } from './components/services/services-mar
     StopAuctionModalComponent,
     MyServicesComponent,
     AddNewServiceComponent,
-    ServicesMarketplaceComponent
+    ServicesMarketplaceComponent,
+    BookServiceComponent
   ],
   imports: [
     BrowserModule,

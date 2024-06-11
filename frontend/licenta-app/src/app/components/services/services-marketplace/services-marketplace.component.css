@@ -1,0 +1,99 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.service-card {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.icon-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.icon-container i {
+  font-size: 3rem; /* Adjusted from fa-5x to fa-3x */
+  color: #0056b3;
+}
+
+.info-container {
+  flex: 4;
+  padding: 0 2rem;
+  text-align: left;
+}
+
+.info-container h2 {
+  font-size: 1.8rem; /* Increased size for visibility */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+.info-container p {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.calendar-container i {
+  font-size: 3rem; /* Adjusted from fa-5x to fa-3x */
+  color: #888;
+}
+
+.calendar-container .btn {
+  width: 120px;
+  margin-top: 10px;
+  padding: 0.5rem; /* Make button size consistent */
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .icon-container,
+  .calendar-container {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .calendar-container .btn {
+    width: 100%;
+  }
+}
