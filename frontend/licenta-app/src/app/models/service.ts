@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export interface Service {
   id?: number;
   name: string;
@@ -6,4 +8,5 @@ export interface Service {
   duration: number;
   category: string;
   dorm: string;
+  owner?: User;
 }

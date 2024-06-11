@@ -40,7 +40,7 @@ export class RegisterComponent {
     this.http.post('http://localhost:8080/api/users/register', user).subscribe(
       (response) => {
         console.log('User registered successfully', response);
-        this.router.navigate(['/home']).then(() => {
+        this.router.navigate(['/']).then(() => {
           location.reload();
         });
       },

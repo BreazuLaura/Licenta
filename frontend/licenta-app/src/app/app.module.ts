@@ -42,6 +42,7 @@ import { AddNewServiceComponent} from './components/services/add-new-service/add
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { ServicesMarketplaceComponent } from './components/services/services-marketplace/services-marketplace.component';
 
 
 
@@ -73,7 +74,8 @@ import interactionPlugin from '@fullcalendar/interaction';
     DormMapComponent,
     StopAuctionModalComponent,
     MyServicesComponent,
-    AddNewServiceComponent
+    AddNewServiceComponent,
+    ServicesMarketplaceComponent
   ],
   imports: [
     BrowserModule,
