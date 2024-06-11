@@ -1,4 +1,5 @@
 import {Service} from "./service";
+import {User} from "./user";
 
 export class Appointment {
   id?: number;
@@ -6,6 +7,6 @@ export class Appointment {
   endTime!: string;   // Using string to handle date-time format easily
   service!: Service;
   ownerId!: number;
-  buyerId?: number;
+  buyer?: User;
   status!: string;
 }

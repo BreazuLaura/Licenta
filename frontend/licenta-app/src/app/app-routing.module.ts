@@ -23,6 +23,7 @@ import {DormMapComponent} from "./components/dorm-map/dorm-map.component";
 import {MyServicesComponent} from "./components/services/my-services/my-services.component";
 import {AddNewServiceComponent} from "./components/services/add-new-service/add-new-service.component";
 import {ServicesMarketplaceComponent} from "./components/services/services-marketplace/services-marketplace.component";
+import {BookServiceComponent} from "./components/services/book-service/book-service.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'dorm-map', component: DormMapComponent },
   { path: 'my-services', component: MyServicesComponent },
   { path: 'add-new-service', component: AddNewServiceComponent},
-  { path: 'services-marketplace', component: ServicesMarketplaceComponent }
+  { path: 'services-marketplace', component: ServicesMarketplaceComponent },
+  { path: 'book-service/:id', component: BookServiceComponent }
 
 
 

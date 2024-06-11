@@ -26,4 +26,8 @@ export class AppointmentService {
   getAppointmentsByOwnerId(ownerId: number): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.apiUrl}/owner/${ownerId}`);
   }
+
+  getAppointmentsByService(serviceId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.apiUrl}/service/${serviceId}`);
+  }
 }

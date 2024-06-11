@@ -78,7 +78,6 @@ export class MyServicesComponent implements OnInit {
   }
 
   loadAppointment(): void {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     this.appointmentService.getAppointmentsByOwnerId(this.userId).subscribe(
       (appointments: Appointment[]) => {
         this.appointments = appointments;
@@ -164,7 +163,6 @@ export class MyServicesComponent implements OnInit {
         endTime: new Date(info.date.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
         service: service,
         ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
-        buyerId: 0,
         status: 'AVAILABLE'
       };
 
@@ -221,7 +219,6 @@ export class MyServicesComponent implements OnInit {
         endTime: new Date(event.start!.getTime() + service.duration * 60 * 60 * 1000).toISOString(),
         service: service,
         ownerId: Number(localStorage.getItem('userId')), // Assuming owner is the logged-in user
-        buyerId: Number(localStorage.getItem('userId')), // For now, set the buyer as the logged-in user; update logic as needed
         status: 'AVAILABLE'
 
       };

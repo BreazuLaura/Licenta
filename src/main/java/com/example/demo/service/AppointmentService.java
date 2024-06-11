@@ -55,4 +55,8 @@ public class AppointmentService {
     public List<Appointment> getAppointmentByOwnerId(Long id) {
         return appointmentRepository.findByOwnerId(id);
     }
+
+    public List<Appointment> getAppointmentsByServiceId(Long serviceId) {
+        return appointmentRepository.findByServicesId(serviceId);
+    }
 }
