@@ -171,7 +171,6 @@ export class MyServicesComponent implements OnInit {
         error => console.error('Error saving appointment', error)
       );
     }
-
     const removeCheckbox = document.getElementById('drop-remove') as HTMLInputElement;
     if (removeCheckbox && removeCheckbox.checked) {
       info.draggedEl.parentNode!.removeChild(info.draggedEl);

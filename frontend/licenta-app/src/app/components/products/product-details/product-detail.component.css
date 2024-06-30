@@ -1,0 +1,13 @@
+.btn-primary{
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  font-size: 1.32rem;
+  padding: 0.5rem;
+  height: 48px;
+}
+
+.btn-primary:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: #fff;
+}

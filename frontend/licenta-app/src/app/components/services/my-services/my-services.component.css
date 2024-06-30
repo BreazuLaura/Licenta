@@ -1,7 +1,7 @@
 .card {
   border: 1px solid #e3e3e3;
   border-radius: 5px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-body {
@@ -16,4 +16,39 @@
 
 .btn-block {
   width: 100%;
+}
+
+.btn-primary{
+  background-color: #17a2b8!important;
+  border-color: #17a2b8!important;
+}
+
+.btn-primary:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: #fff;
+}
+
+.button-style {
+  display: inline-block;
+  padding: 5px 5px;
+  margin: 2px;
+  background-color: #007bff; /* You can use the color you like */
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-style:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+.button-style:active {
+  background-color: #004085; /* Even darker shade for active effect */
 }

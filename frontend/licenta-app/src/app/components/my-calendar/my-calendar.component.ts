@@ -1,25 +1,22 @@
 import { ActivatedRoute } from '@angular/router';
-import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendarModule
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';  // Add AfterViewInit
-import {CalendarOptions, EventClickArg, EventInput} from '@fullcalendar/core';
+import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular'; // Import FullCalendarComponent from @fullcalendar/angular
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import {Appointment} from "../../../models/appointment";
-import {Service} from "../../../models/service";
-import {ServiceService} from "../../../services/service.service";
-import {MatDialog} from "@angular/material/dialog";
-import {BookServicePopupComponent} from "../book-service-popup/book-service-popup.component";
+import {Appointment} from "../../models/appointment";
+import {Service} from "../../models/service";
+import {ServiceService} from "../../services/service.service";
 
 @Component({
-  selector: 'app-book-service',
-  templateUrl: './book-service.component.html',
-  styleUrls: ['./book-service.component.css']
+  selector: 'app-my-calendar',
+  templateUrl: './my-calendar.component.html',
+  styleUrls: ['./my-calendar.component.css']
 })
-export class BookServiceComponent implements OnInit {
+export class MyCalendarComponent implements OnInit {
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent; // Get reference to calendar
 
   calendarOptions: CalendarOptions = {
@@ -33,35 +30,12 @@ export class BookServiceComponent implements OnInit {
     editable: true,
     droppable: true,
     events: [] as EventInput[],
-    eventClick: (info) => {
-      this.openBookServicePopup(Number(info.event.id));
-    }
-
   };
   userId: number;
   services: Service[] = [];
   serviceColors: { [id: number]: string } = {};
   appointments: Appointment[] = [];
   serviceId: number;
-
-
-
-  constructor(private route: ActivatedRoute, private serviceService: ServiceService, private appointmentService: AppointmentService, public dialog: MatDialog) {
-    const userIdStr = localStorage.getItem('userId');
-    this.userId = userIdStr ? parseInt(userIdStr, 10) : 0;
-    this.serviceId = Number(this.route.snapshot.paramMap.get('id'));
-
-  }
-
-
-  ngOnInit(): void {
-    const userId = Number(localStorage.getItem('userId'));
-
-    this.loadAppointment();
-    this.initDraggableEvents();
-    this.initCalendar();
-
-  }
 
 
   initCalendar(): void {
@@ -75,14 +49,27 @@ export class BookServiceComponent implements OnInit {
       editable: true,
       droppable: true,
       events: [],
-      eventClick: (info) => {
-        this.openBookServicePopup(Number(info.event.id));
-      }
-
 
     };
   }
 
+
+
+  constructor(private route: ActivatedRoute, private serviceService: ServiceService, private appointmentService: AppointmentService) {
+    const userIdStr = localStorage.getItem('userId');
+    this.userId = userIdStr ? parseInt(userIdStr, 10) : 0;
+    this.serviceId = Number(this.route.snapshot.paramMap.get('id'));
+
+  }
+
+  ngOnInit(): void {
+    const userId = Number(localStorage.getItem('userId'));
+
+    this.loadAppointment();
+    this.initDraggableEvents();
+    this.initCalendar();
+
+  }
 
   loadAppointment(): void {
     this.appointmentService.getAppointmentsByService(this.serviceId).subscribe(
@@ -131,21 +118,6 @@ export class BookServiceComponent implements OnInit {
         backgroundColor: serviceId ? this.serviceColors[serviceId] : '#000000', // Default to black if undefined
         borderColor: serviceId ? this.serviceColors[serviceId] : '#000000'
       };
-    });
-  }
-
-
-  openBookServicePopup(appointmentId: number): void {
-    const dialogRef = this.dialog.open(BookServicePopupComponent, {
-      width: '300px',
-      data: { appointmentId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Appointment booked successfully');
-        // Refresh the calendar or handle the booking confirmation
-      }
     });
   }
 

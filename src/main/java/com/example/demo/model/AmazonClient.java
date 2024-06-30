@@ -64,17 +64,13 @@ public class AmazonClient {
     }
 
     public String uploadFile(MultipartFile multipartFile) {
-        String fileUrl = "";
         String fileName = "";
         try {
             File file = convertMultiPartToFile(multipartFile);
             fileName = generateFileName(multipartFile);
-            fileUrl = endpointUrl + "/" + bucketName + "/" + fileName;
             uploadFileTos3bucket(fileName, file);
             file.delete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace();}
         return fileName;
     }
 
@@ -97,13 +93,6 @@ public class AmazonClient {
         }
     }
 
-
-    public String deleteFileFromS3Bucket(String fileUrl) {
-        String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-        s3client.deleteObject(new DeleteObjectRequest(bucketName + "/", fileName));
-        return "Successfully deleted";
-    }
-
     private boolean bucketIsEmpty() {
         ListObjectsV2Result result = s3client.listObjectsV2(this.bucketName);
         if (result == null){
@@ -112,4 +101,13 @@ public class AmazonClient {
         List<S3ObjectSummary> objects = result.getObjectSummaries();
         return objects.isEmpty();
     }
+
+
+    public String deleteFileFromS3Bucket(String fileUrl) {
+        String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+        s3client.deleteObject(new DeleteObjectRequest(bucketName + "/", fileName));
+        return "Successfully deleted";
+    }
+
+
 }

@@ -12,7 +12,9 @@ import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
@@ -58,5 +60,20 @@ public class AppointmentService {
 
     public List<Appointment> getAppointmentsByServiceId(Long serviceId) {
         return appointmentRepository.findByServicesId(serviceId);
+    }
+
+    public Appointment bookAppointment(Long appointmentId, Long buyerId) throws ValidationException {
+        Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
+        if (appointment.isEmpty())
+            throw new ValidationException("Appointment not found");
+
+        if (appointment.get().getStatus() != AppointmentStatus.AVAILABLE) {
+            throw new ValidationException("Appointment is not available for booking");
+        }
+
+        appointment.get().setStatus(AppointmentStatus.RESERVED);
+        appointment.get().setBuyer(userRepository.findById(buyerId).get());
+
+        return appointmentRepository.save(appointment.get());
     }
 }

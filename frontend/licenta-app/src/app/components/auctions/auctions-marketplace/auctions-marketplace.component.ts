@@ -11,6 +11,16 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class AuctionsMarketplaceComponent implements OnInit {
   auctions: Auction[] = [];
+  searchQuery: string = '';
+  filterCategory: string = '';
+  filterDorm: string = '';
+  filterStatus: string = '';
+  sortOrder: string = 'asc';
+  orderBy: string = 'name';
+
+  categories: string[] = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD'];
+  dorms: string[] = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_P16', 'CAMIN_P20', 'CAMIN_P22'];
+  statuses: string[] = ['AVAILABLE', 'SOLD'];
 
   constructor(
     private auctionService: AuctionService,
@@ -37,5 +47,25 @@ export class AuctionsMarketplaceComponent implements OnInit {
         console.error('Error fetching auctions', error);
       }
     );
+  }
+
+  getFilteredProducts(): void {
+  }
+
+
+  onSearch(): void {
+    this.getFilteredProducts();
+  }
+
+  onSortOrderChange(): void {
+    this.getFilteredProducts();
+  }
+
+  onOrderByChange(): void {
+    this.getFilteredProducts();
+  }
+
+  onFilterChange(): void {
+    this.getFilteredProducts();
   }
 }

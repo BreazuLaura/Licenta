@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row mb-1">
     <div class="col-sm-6">
-      <h1>Calendar</h1>
+      <h1>My Services</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Calendar</li>
+        <li class="breadcrumb-item active">My Services</li>
       </ol>
     </div>
   </div>
@@ -21,10 +21,10 @@
             <h4 class="card-title">Draggable Services</h4>
           </div>
           <div class="card-body">
-            <div *ngFor="let services of services"
-                 class="fc-event draggable-event"
-                 [ngClass]="serviceColors[services.id!]">
-              {{ services.name }}
+            <div *ngFor="let service of services"
+                 class="fc-event draggable-event button-style"
+                 [ngClass]="serviceColors[service.id!]">
+              {{ service.name }}
             </div>
           </div>
         </div>

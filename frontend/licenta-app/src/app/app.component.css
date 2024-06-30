@@ -16,3 +16,9 @@
   font-size: 1rem; /* Adjust the size as needed */
   font-weight: bold;
 }
+/* Inside your component's CSS file or your global stylesheet */
+.custom-dropdown {
+  width: 600px; /* Adjust to your desired width */
+  max-height: 500px; /* Adjust to your desired maximum height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}

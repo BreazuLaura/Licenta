@@ -38,6 +38,12 @@
 .btn-info {
   background-color: #17a2b8;
   border-color: #17a2b8;
-  font-size: 14px;
-  padding: 5px 10px;
+  font-size: 0.875rem;
+  margin-right: 5px;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: #fff;
 }

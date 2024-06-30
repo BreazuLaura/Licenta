@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,13 @@ public class AppointmentController {
     public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointment) {
         Appointment savedAppointment = appointmentService.saveAppointment(appointment);
         return ResponseEntity.ok(savedAppointment);
+    }
+
+
+    @PutMapping("/book/appointmentId/buyerId")
+    public ResponseEntity<Appointment> bookAppointment(@PathVariable Long appointmentId, @PathVariable Long buyerId) throws ValidationException {
+        Appointment bookedAppointment = appointmentService.bookAppointment(appointmentId, buyerId);
+        return ResponseEntity.ok(bookedAppointment);
     }
 
     @GetMapping

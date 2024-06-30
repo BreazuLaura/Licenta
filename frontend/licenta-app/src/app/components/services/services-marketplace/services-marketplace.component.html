@@ -1,29 +1,94 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>Services Marketplace</h1>
+<div class="row">
+  <div class="col-12">
+    <h1>Services Marketplace</h1>
+  </div>
+</div>
+
+<section class="content">
+  <div class="card card-primary card-outline custom-card">
+    <div class="card-body">
+      <form (ngSubmit)="onSearch()">
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="resultType">Search:</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="resultType" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Service name">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-info">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="sortOrder">Sort Order:</label>
+            <select class="form-control" id="sortOrder" [(ngModel)]="sortOrder" name="sortOrder" (change)="onSortOrderChange()">
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="orderBy">Order By:</label>
+            <select class="form-control" id="orderBy" [(ngModel)]="orderBy" name="orderBy" (change)="onOrderByChange()">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" [(ngModel)]="filterCategory" name="filterCategory" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="dorm">Dorm:</label>
+            <select class="form-control" id="dorm" [(ngModel)]="filterDorm" name="filterDorm" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let dorm of dorms" [value]="dorm">{{ dorm }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" [(ngModel)]="filterStatus" name="filterStatus" (change)="onFilterChange()">
+              <option value="">Any</option>
+              <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="row" *ngFor="let service of services">
-    <div class="col-12 mb-3">
-      <div class="card service-card">
-        <div class="card-body d-flex justify-content-between align-items-center">
-          <div class="icon-container">
-            <i class="fas fa-bullhorn fa-5x text-primary"></i>
-          </div>
-          <div class="info-container">
-            <h2 class="card-title">{{ service.name }}</h2>
-            <p class="card-text"><strong>Description:</strong> {{ service.description }}</p>
-            <p class="card-text"><strong>Price:</strong> {{ service.price }} RON</p>
-            <p class="card-text"><strong>Duration:</strong> {{ service.duration }} hours</p>
+</section>
+
+<div class="row" *ngFor="let service of services">
+  <div class="col-12 mb-3">
+    <div class="card service-card">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div class="icon-container">
+          <i class="fas fa-bullhorn fa-5x custom-icon-color"></i>
+        </div>
+        <h2 class="card-title col-md-2">{{ service.name }}</h2>
+        <div class="info-container">
+          <div class="row align-items-center">
+          <div class="col-md-8">
+            <p class="card-text mb-0"><strong>Description:</strong> {{ service.description }}</p>
             <p class="card-text"><strong>Dorm:</strong> {{ service.dorm }}</p>
           </div>
-          <div class="calendar-container text-center">
-            <i class="fas fa-calendar-alt fa-3x text-secondary"></i>
-            <button class="btn btn-success btn-sm mt-2" (click)="bookService(service.id)">See availability</button>
+          <div class="col-md-3">
+            <p class="card-text mb-0"><strong>Price:</strong> {{ service.price }} RON</p>
+            <p class="card-text"><strong>Duration:</strong> {{ service.duration }} hours</p>
           </div>
+          </div>
+        </div>
+        <div class="calendar-container text-center">
+          <i class="fas fa-calendar-alt fa-3x text-secondary"></i>
+          <button class="btn btn-info btn-sm mt-2" (click)="bookService(service.id)">See availability</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
