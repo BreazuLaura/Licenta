@@ -111,4 +111,11 @@ public class ProductController {
     public Users getSellerOfProduct(@PathVariable Long productId) throws ValidationException {
         return productService.getSellerOfProduct(productId);
     }
+
+//    @PutMapping("/{id}/status")
+//    public Product updateProductStatus(@PathVariable Long id, @RequestParam String status) {
+//        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+//        product.setStatus(status);
+//        return productRepository.save(product);
+//    }
 }

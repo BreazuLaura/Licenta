@@ -46,6 +46,7 @@ import { ServicesMarketplaceComponent } from './components/services/services-mar
 import { BookServiceComponent } from './components/services/book-service/book-service.component';
 import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
 import { BookServicePopupComponent } from './components/services/book-service-popup/book-service-popup.component';
+import { NotificationDropdownComponent } from './components/notification-dropdown/notification-dropdown.component';
 
 
 
@@ -81,7 +82,8 @@ import { BookServicePopupComponent } from './components/services/book-service-po
     ServicesMarketplaceComponent,
     BookServiceComponent,
     MyCalendarComponent,
-    BookServicePopupComponent
+    BookServicePopupComponent,
+    NotificationDropdownComponent
   ],
   imports: [
     BrowserModule,
