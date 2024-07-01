@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.exceptionsHandler.ResourceNotFoundException;
 import com.example.demo.model.AmazonClient;
 import com.example.demo.model.Photo;
 import com.example.demo.model.Product;
@@ -111,6 +112,12 @@ public class ProductService {
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    public Product updateProductStatus(Long id, String status) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        product.setStatus(Status.valueOf(status));
+        return productRepository.save(product);
     }
 
 }

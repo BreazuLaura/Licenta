@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Auction;
+import com.example.demo.model.Product;
+import com.example.demo.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -35,6 +37,20 @@ public class EmailService {
                 "We would like to thank you for your interest!\n\n" +
                 "Best regards,\n" +
                 organizationName);
+        emailSender.send(message);
+    }
+
+    public void sendAcceptBuyRequestEmail(Product product, Users user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("dormmarketplace@outlook.com"); // Set your 'From' email address
+        message.setTo(user.getEmail());
+        message.setSubject("Buy request accepted!");
+        String name = user.getFirstName() + user.getLastName();
+        message.setText("Hello " + name + ",\n\n" +
+                "We're excited to inform you that your request for buying the product " + product.getName() + " has been accepted." +
+                " Contact the seller of the product to establish the details for receiving the product. Thank you for your purchase! \n\n" +
+                "Best regards,\n" +
+                "Dorm MarketPlace");
         emailSender.send(message);
     }
 

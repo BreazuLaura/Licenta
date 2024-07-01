@@ -10,6 +10,8 @@ import com.example.demo.model.enums.Category;
 import com.example.demo.model.enums.Dorm;
 import com.example.demo.model.enums.Status;
 import com.example.demo.repository.PhotoRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.EmailService;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.xml.bind.ValidationException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -40,6 +43,12 @@ public class ProductController {
 
     @Autowired
     private AmazonClient amazonClient;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -112,10 +121,10 @@ public class ProductController {
         return productService.getSellerOfProduct(productId);
     }
 
-//    @PutMapping("/{id}/status")
-//    public Product updateProductStatus(@PathVariable Long id, @RequestParam String status) {
-//        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
-//        product.setStatus(status);
-//        return productRepository.save(product);
-//    }
+    @PutMapping("/{id}/status/{status}/{userId}")
+    public ResponseEntity<Product> updateProductStatus(@PathVariable Long id, @PathVariable String status, @PathVariable Long userId) {
+        Product updatedProduct = productService.updateProductStatus(id, status);
+        emailService.sendAcceptBuyRequestEmail(updatedProduct, userRepository.findById(userId).orElse(null));
+        return ResponseEntity.ok(updatedProduct);
+    }
 }

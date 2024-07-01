@@ -53,4 +53,8 @@ export class ProductService {
   downloadFile(id: any): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/photo/${id}`, { responseType: 'blob' });
   }
+
+  updateProductStatus(productId: number, status: string, senderId: number | undefined): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${productId}/status/${status}/${senderId}`, {});
+  }
 }

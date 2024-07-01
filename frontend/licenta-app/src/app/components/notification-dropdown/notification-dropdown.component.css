@@ -1,0 +1,13 @@
+.initials-circle {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 32px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 8px;
+}

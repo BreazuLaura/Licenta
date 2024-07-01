@@ -33,4 +33,8 @@ public class NotificationService {
 //        notification.setSender(userRepository.findById(notification.getSender().getId()).orElse(null));
         return notificationRepository.save(notification);
     }
+
+    public void deleteNotification(Long id) {
+        notificationRepository.deleteById(id);
+    }
 }

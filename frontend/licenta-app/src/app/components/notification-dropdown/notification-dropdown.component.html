@@ -1,0 +1,38 @@
+<li class="nav-item dropdown">
+  <a class="nav-link" data-toggle="dropdown" href="#">
+    <i class="far fa-bell"></i>
+    <span class="badge badge-warning navbar-badge">{{ notifications.length }}</span>
+  </a>
+  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right custom-dropdown">
+    <ng-container *ngFor="let notification of notifications">
+      <a href="#" class="dropdown-item">
+        <div class="media">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+            <div class="image">
+              <img [src]="'assets/img/profile.jpg'" alt="User Image" class="img-circle img-size-32 mr-2" (error)="imageError = true" *ngIf="!imageError; else initials1">
+              <ng-template #initials1>
+                <div class="initials-circle">
+                  {{ getInitials(notification.sender?.lastName || '')[0] }}{{ (notification.sender?.firstName || '')[0] }}
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="media-body">
+            <h3 class="dropdown-item-title">
+              {{ (notification.sender?.lastName || '') }} {{ (notification.sender?.firstName || '')}}
+              <span class="float-right text-sm" [ngClass]="getNotificationClass(notification)"><i class="fas fa-star"></i></span>
+            </h3>
+            <p class="text-sm">{{ notification.text }}</p>
+            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ notification.timestamp }}</p>
+
+            <div class="d-flex justify-content-center mt-2" *ngIf="notification.notificationType === 'BUY_REQUEST'">
+              <button class="btn btn-success btn-sm mx-1" (click)="acceptRequest(notification); $event.stopPropagation(); $event.preventDefault();">Accept & Sell</button>
+              <button class="btn btn-danger btn-sm mx-1" (click)="denyRequest(notification); $event.stopPropagation(); $event.preventDefault();">Deny request</button>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="dropdown-divider"></div>
+    </ng-container>
+  </div>
+</li>

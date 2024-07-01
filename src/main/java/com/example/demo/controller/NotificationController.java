@@ -4,6 +4,7 @@ import com.example.demo.model.Notification;
 import com.example.demo.model.enums.NotificationType;
 import com.example.demo.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class NotificationController {
             notification.setNotificationType(NotificationType.BUY_REQUEST);
         }
         return notificationService.saveNotification(notification);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
+        notificationService.deleteNotification(id);
+        return ResponseEntity.noContent().build();
     }
 }
