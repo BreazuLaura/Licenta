@@ -20,7 +20,7 @@ export class ProductFormComponent {
     category: '',
     status: null
   };
-  categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER'];
+  categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER', 'APPLIANCES'];
   statuses = ['AVAILABLE', 'SOLD'];
   saleTypes = ['MARKETPLACE', 'AUCTIONPLACE'];
   dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_P16', 'CAMIN_P20', 'CAMIN_P22']; // Add dorms enum

@@ -13,6 +13,7 @@ import {Service} from "../../../models/service";
 import {ServiceService} from "../../../services/service.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookServicePopupComponent} from "../book-service-popup/book-service-popup.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-book-service',
@@ -34,6 +35,8 @@ export class BookServiceComponent implements OnInit {
     droppable: true,
     events: [] as EventInput[],
     eventClick: (info) => {
+      console.log("aaaaaaaaaaaaaaaa");
+      console.log(info);
       this.openBookServicePopup(Number(info.event.id));
     }
 
@@ -46,7 +49,7 @@ export class BookServiceComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private serviceService: ServiceService, private appointmentService: AppointmentService, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private serviceService: ServiceService, private appointmentService: AppointmentService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     const userIdStr = localStorage.getItem('userId');
     this.userId = userIdStr ? parseInt(userIdStr, 10) : 0;
     this.serviceId = Number(this.route.snapshot.paramMap.get('id'));
@@ -76,6 +79,9 @@ export class BookServiceComponent implements OnInit {
       droppable: true,
       events: [],
       eventClick: (info) => {
+        console.log("aaaaaaaaaaaaaaaa");
+
+        console.log(Number(info.event));
         this.openBookServicePopup(Number(info.event.id));
       }
 
@@ -87,7 +93,7 @@ export class BookServiceComponent implements OnInit {
   loadAppointment(): void {
     this.appointmentService.getAppointmentsByService(this.serviceId).subscribe(
       (appointments: Appointment[]) => {
-        this.appointments = appointments;
+        this.appointments = appointments.filter(appointment => appointment.status === 'AVAILABLE');
         this.initializeCalendarEvents();
       },
       error => {
@@ -122,9 +128,11 @@ export class BookServiceComponent implements OnInit {
   }
 
   initializeCalendarEvents(): void {
+    // @ts-ignore
     this.calendarOptions.events = this.appointments.map(appointment => {
       const serviceId = appointment.service?.id;
       return {
+        id: appointment.id,
         title: appointment.service.name,
         start: appointment.startTime,
         end: appointment.endTime,
@@ -138,14 +146,23 @@ export class BookServiceComponent implements OnInit {
   openBookServicePopup(appointmentId: number): void {
     const dialogRef = this.dialog.open(BookServicePopupComponent, {
       width: '300px',
-      data: { appointmentId }
+      data: { appointmentId: appointmentId }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Appointment booked successfully');
+        this.snackBar.open('Appointment booked successfully', 'Close', {
+          duration: 2000, // Duration in milliseconds
+          verticalPosition: 'bottom', // Position of the snackbar
+          horizontalPosition: 'center' // Position of the snackbar
+        });
         // Refresh the calendar or handle the booking confirmation
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+
       }
+
     });
   }
 

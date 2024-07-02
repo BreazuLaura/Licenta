@@ -25,8 +25,10 @@ public class AppointmentController {
     }
 
 
-    @PutMapping("/book/appointmentId/buyerId")
+    @PutMapping("/book/{appointmentId}/{buyerId}")
     public ResponseEntity<Appointment> bookAppointment(@PathVariable Long appointmentId, @PathVariable Long buyerId) throws ValidationException {
+        System.out.println(appointmentId);
+        System.out.println(buyerId);
         Appointment bookedAppointment = appointmentService.bookAppointment(appointmentId, buyerId);
         return ResponseEntity.ok(bookedAppointment);
     }
@@ -44,6 +46,11 @@ public class AppointmentController {
     @GetMapping("/owner/{id}")
     public ResponseEntity<List<Appointment>> getAppointmentByOwnerId(@PathVariable Long id) {
         return ResponseEntity.ok(appointmentService.getAppointmentByOwnerId(id));
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Appointment>> getAppointmentByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(appointmentService.getAppointmentByUserId(id));
     }
 
     @GetMapping("/service/{serviceId}")

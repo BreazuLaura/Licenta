@@ -31,8 +31,12 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(`${this.apiUrl}/service/${serviceId}`);
   }
 
-  bookAppointment(appointmentId: number, buyerId: number) {
+  bookAppointment(appointmentId: number, buyerId: number): Observable<any> {
     const url = `${this.apiUrl}/book/${appointmentId}/${buyerId}`;
     return this.http.put(url, {});
+  }
+
+  getAppointmentsByUser(userId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.apiUrl}/user/${userId}`);
   }
 }

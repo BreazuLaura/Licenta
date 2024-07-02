@@ -72,7 +72,7 @@ export class MyCalendarComponent implements OnInit {
   }
 
   loadAppointment(): void {
-    this.appointmentService.getAppointmentsByService(this.serviceId).subscribe(
+    this.appointmentService.getAppointmentsByUser(this.userId).subscribe(
       (appointments: Appointment[]) => {
         this.appointments = appointments;
         this.initializeCalendarEvents();

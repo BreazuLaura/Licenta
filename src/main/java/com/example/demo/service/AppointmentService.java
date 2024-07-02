@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -75,5 +76,14 @@ public class AppointmentService {
         appointment.get().setBuyer(userRepository.findById(buyerId).get());
 
         return appointmentRepository.save(appointment.get());
+    }
+
+    public List<Appointment> getAppointmentByUserId(Long id) {
+        List<Appointment> appointments = appointmentRepository.findByOwnerId(id);
+        appointments.stream().filter(a -> (a.getStatus().equals(AppointmentStatus.RESERVED))).collect(Collectors.toList());
+        List<Appointment> userAppointments = appointmentRepository.findByBuyerId(id);
+        appointments.addAll(userAppointments);
+
+        return appointments;
     }
 }

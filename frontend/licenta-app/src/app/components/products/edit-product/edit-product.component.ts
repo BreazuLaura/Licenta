@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 export class EditProductComponent implements OnInit {
   product: Product | undefined;
   imageSrc?: SafeUrl; // Now optional to handle initialization
-  categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER'];
+  categories = ['ELECTRONICS', 'FURNITURE', 'FASHION', 'FOOD', 'OTHER', 'APPLIANCES'];
   dorms = ['CAMIN_P1', 'CAMIN_P3', 'CAMIN_P5', 'CAMIN_P6', 'CAMIN_P16', 'CAMIN_P20', 'CAMIN_P22'];
 
 
